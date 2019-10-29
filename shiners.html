@@ -162,12 +162,12 @@ the end of the day.
 [[Store]]
 [[Church]]
 [[Cottage|Home]]
-
+&lt;&lt;if $debug&gt;&gt;
 [[(DEBUG) QuickDine|Dinner]]
 [[(DEBUG) Kill wife|Corktown Hub][$wNeedsDis to 0]]
 [[(DEBUG) Kill son|Corktown Hub][$sNeedsDis to 0]]
 [[(DEBUG) Kill daughter|Corktown Hub][$dNeedsDis to 0]]
-
+&lt;&lt;/if&gt;&gt;
 
 &lt;&lt;set $wealth to Math.clamp($wealth, 0, 100)&gt;&gt;
 &lt;&lt;set $health to Math.clamp($health, 0, 100)&gt;&gt;
@@ -175,11 +175,11 @@ the end of the day.
 &lt;&lt;set $social to Math.clamp($social, 0, 100)&gt;&gt;</tw-passagedata><tw-passagedata pid="3" name="Stats" tags="" position="101,127" size="100,100">&lt;&lt;nobr&gt;&gt; Wealth: $wealth
 &lt;&lt;if $wealth &gt;= 75&gt;&gt; &lt;&lt;set $wr to 4&gt;&gt;
 @@color:#15ff00;You&#39;re rather poor, but better off than your fellows.@@
-&lt;&lt;elseif $wealth &gt;=50 and $wealth &lt; 75&gt;&gt; &lt;&lt;set $wr to 3&gt;&gt;
+&lt;&lt;elseif $wealth &gt;= 50 and $wealth &lt; 75&gt;&gt; &lt;&lt;set $wr to 3&gt;&gt;
 @@color:#f2ff00;Your fortunes are meagre, but you can still scrape by.@@
 &lt;&lt;elseif $wealth &gt; 0 and $wealth &lt; 50&gt;&gt; &lt;&lt;set $wr to 2&gt;&gt;
 @@color:#ffaa00;You can barely afford the necessities of survival.@@
-&lt;&lt;elseif $wealth =0&gt;&gt; &lt;&lt;set $wr to 1&gt;&gt;
+&lt;&lt;elseif $wealth is 0&gt;&gt; &lt;&lt;set $wr to 1&gt;&gt;
 @@color:#ff0000;You cannot afford to live.@@
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
@@ -269,6 +269,7 @@ William N. T. Wylie. &quot;Poverty, Distress, and Disease: Labour and the Constr
 </tw-passagedata><tw-passagedata pid="5" name="StoryInit" tags="" position="228,13" size="100,100">&lt;&lt;set $choice to &quot;&quot;&gt;&gt;
 
 &lt;&lt;set $gameStart to true&gt;&gt; /* Set this to true when testing */
+&lt;&lt;set $debug to false&gt;&gt;
 &lt;&lt;set $day to 1&gt;&gt;
 &lt;&lt;set $year to 1834&gt;&gt;
 &lt;&lt;set $act to 1&gt;&gt; /* 3 acts total */
@@ -419,6 +420,7 @@ You leave with your wages.
 &lt;&lt;else&gt;&gt; &lt;&lt;set $wealth += 4&gt;&gt; &lt;&lt;/if&gt;&gt;&lt;&lt;/link&gt;&gt;
 
 &lt;&lt;if $week is 2&gt;&gt;&lt;&lt;goto Choice1&gt;&gt;&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="10" name="Physicality" tags="" position="272,205" size="100,100">&#39;&#39;THIS GAME IS A WORK-IN-PROGRESS AND IS SUBJECT TO CHANGE&#39;&#39;
+Version 0.1
 
 This is a fictional story, but it is based on the factual lives of Irish Immigrants in nineteenth-century Ottawa. You can click &#39;Sources&#39; on the menu to the left for further reading.
 
@@ -426,7 +428,7 @@ Some choices, shown in green, require a physicality test. To answer these riddle
 
 Physicality tests will require you enter a certain word to progress. Try it now by entering &#39;begin&#39; below, then hit enter or press &#39;Answer&#39;.
 &lt;&lt;set _choice to $choice &gt;&gt;
-&lt;&lt;if _choice is &quot;begin&quot;&gt;&gt; [[That&#39;s all there is to it.|Intro]]&lt;&lt;else&gt;&gt;&lt;&lt;textbox &quot;$choice&quot; &quot;&quot; &quot;Physicality&quot; autofocus&gt;&gt; [[Answer|Physicality]]&lt;&lt;/if&gt;&gt;
+&lt;&lt;if _choice is &quot;begin&quot;&gt;&gt; [[That&#39;s all there is to it.|Intro]]&lt;&lt;elseif _choice is &quot;debug&quot;&gt;&gt;[[Debug mode activated.|Intro][$debug to true]]&lt;&lt;else&gt;&gt;&lt;&lt;textbox &quot;$choice&quot; &quot;&quot; &quot;Physicality&quot; autofocus&gt;&gt; [[Answer|Physicality]]&lt;&lt;/if&gt;&gt;
 </tw-passagedata><tw-passagedata pid="11" name="StoryCaption" tags="" position="342,11" size="100,100">Act $act
 Week $week
 &lt;&lt;if $daytime is true&gt;&gt;Day&lt;&lt;else&gt;&gt;Night&lt;&lt;/if&gt;&gt;
