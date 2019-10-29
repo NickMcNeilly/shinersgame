@@ -811,13 +811,13 @@ You leave with your wages. &lt;&lt;set $wealth += 4&gt;&gt;
 
 [[Head Home|Corktown Hub][$health -= 3]] 
 
-&lt;&lt;set $social -= 10&gt;&gt;</tw-passagedata><tw-passagedata pid="23" name="Choice1Option3Test" tags="phystest" position="1454,146" size="100,100">Found on the Rideau and built to deny
+&lt;&lt;set $social -= 10&gt;&gt;</tw-passagedata><tw-passagedata pid="23" name="Choice1Option3Test" tags="phystest" position="1453,146" size="100,100">Found on the Rideau and built to deny
 I can part for your ships, or bind happy lives
 Damming up waters, or parting for love,
 I keep what needs keeping, keys rain from above
 What am I?
 &lt;&lt;set _choice to $choice &gt;&gt;
-&lt;&lt;if _choice is &quot;lock&quot; or _choice is &quot;locks&quot;&gt;&gt; [[Continue|Choice1Option3]]&lt;&lt;else&gt;&gt;&lt;&lt;textbox &quot;$choice&quot; &quot;&quot; &quot;Choice1Option3Test&quot; autofocus&gt;&gt; [[Answer|Choice1Option3Test]]&lt;&lt;/if&gt;&gt;
+&lt;&lt;if _choice is &quot;lock&quot; or _choice is &quot;locks&quot; or _choice is &quot;a lock&quot;&gt;&gt; [[Correct|Choice1Option3]]&lt;&lt;else&gt;&gt;&lt;&lt;textbox &quot;$choice&quot; &quot;&quot; &quot;Choice1Option3Test&quot; autofocus&gt;&gt; [[Answer|Choice1Option3Test]]&lt;&lt;/if&gt;&gt;
 [[Back|Choice1]]</tw-passagedata><tw-passagedata pid="24" name="Choice1Option3" tags="" position="1605,141" size="100,100">You hurry to find your companions. After finding some resting workers, you quickly explain the situation - and before you all hurry back, you find some old gloves and follow suit. Together, you bring the moaning, dehydrated Irishman to a priest. A good result - your peers are grateful for your watchfulness, and you managed to avoid contracting the disease.
 
 &lt;&lt;nobr&gt;&gt;
