@@ -100,7 +100,7 @@ var saveAs=saveAs||navigator.msSaveBlob&&navigator.msSaveBlob.bind(navigator)||f
 		<div id="init-lacking">Your browser lacks required capabilities. Please upgrade it or switch to another to continue.</div>
 		<div id="init-loading"><div>Loading&hellip;</div></div>
 	</div>
-	<tw-storydata name="Against the Dying" startnode="10" creator="Twine" creator-version="2.3.5" ifid="8B2B4BE2-A0AE-48A0-8082-E0E208B75C71" zoom="1" format="SugarCube" format-version="2.21.0" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">a.green { color:#31B404; }
+	<tw-storydata name="Against the Dying" startnode="10" creator="Twine" creator-version="2.3.5" ifid="8B2B4BE2-A0AE-48A0-8082-E0E208B75C71" zoom="0.6" format="SugarCube" format-version="2.21.0" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">a.green { color:#31B404; }
 
 a.phys span {
 	color: lime;
@@ -114,7 +114,23 @@ a.phys:hover span {
 }
 
 
+
+
+
+
+
+
+
+
 </style><script role="script" id="twine-user-script" type="text/twine-javascript">
+
+
+
+
+
+
+
+
 
 
 
@@ -144,21 +160,23 @@ Your Daughter, age 1: &lt;&lt;textbox &quot;$daughter&quot; &quot;Caitlín&quot;
 
 When you arrived in what was advertized as the &#39;New World&#39;, you made your way further inland until coming to Bytown, a lumber town that lured you in with the promise of steady work. You&#39;ve settled in a shanty town called Corktown, built into the dirt and earth alongside the unfinished Rideau Canal. You&#39;ve been hired to help finish it. Most of your countrymen are single, perhaps with a wife - and it becomes clear that it&#39;s going to become a challenge to feed your growing family. But you&#39;ve spent what fortune you had coming here - there&#39;s no turning back now.
 
-[[Begin|Corktown Hub][$gameStart to true]]</tw-passagedata><tw-passagedata pid="2" name="Corktown Hub" tags="" position="573,315" size="100,100">&lt;&lt;nobr&gt;&gt; The year is 
+[[Begin|Corktown Hub][$gameStart to true]]</tw-passagedata><tw-passagedata pid="2" name="Corktown Hub" tags="" position="569,311" size="100,100">&lt;&lt;nobr&gt;&gt; The year is 
 &lt;&lt;if $act is 1&gt;&gt;
-1834,
+1830,
 &lt;&lt;elseif $act is 2&gt;&gt;
-1836,
+1833,
 &lt;&lt;else&gt;&gt;
-1840,
+1838,
 &lt;&lt;/if&gt;&gt; and it is 
 &lt;&lt;if $daytime is true&gt;&gt;
 the start of the day.
 &lt;&lt;else&gt;&gt; 
 the end of the day.
-&lt;&lt;/if&gt;&gt; You and your companions are still working on construction of the Rideau Canal. &lt;&lt;/nobr&gt;&gt;
+&lt;&lt;/if&gt;&gt;
 
-&lt;&lt;if $daytime is true&gt;&gt;[[Work the Canal|Canal Work][$daytime to false]]&lt;&lt;else&gt;&gt;You can&#39;t work at night.&lt;&lt;/if&gt;&gt;
+&lt;&lt;if $act is 1&gt;&gt;You and your companions are still working on construction of the Rideau Canal. &lt;&lt;elseif $act is 2&gt;&gt; You are unemployed and seeking employment.&lt;&lt;/if&gt;&gt;&lt;&lt;/nobr&gt;&gt;
+
+&lt;&lt;if $act is 1&gt;&gt;&lt;&lt;if $daytime is true and $strike is false&gt;&gt;[[Work the Canal|Canal Work][$daytime to false]]&lt;&lt;elseif $daytime is false&gt;&gt;You can&#39;t work at night.&lt;&lt;else&gt;&gt;You are on strike.&lt;&lt;/if&gt;&gt;&lt;&lt;elseif $act is 2 and $daytime is true&gt;&gt;[[Look for work|Look For Work]]&lt;&lt;elseif $act is 2 and $daytime is false&gt;&gt;You can&#39;t look for work at night.&lt;&lt;/if&gt;&gt;
 [[Store]]
 [[Church]]
 [[Cottage|Home]]
@@ -171,8 +189,8 @@ the end of the day.
 
 &lt;&lt;set $wealth to Math.clamp($wealth, 0, 100)&gt;&gt;
 &lt;&lt;set $health to Math.clamp($health, 0, 100)&gt;&gt;
-&lt;&lt;set $family to Math.clamp($family, 0, 100)&gt;&gt;
-&lt;&lt;set $social to Math.clamp($social, 0, 100)&gt;&gt;</tw-passagedata><tw-passagedata pid="3" name="Stats" tags="" position="101,127" size="100,100">&lt;&lt;nobr&gt;&gt; Wealth: $wealth
+&lt;&lt;set $compassion to Math.clamp($compassion, 0, 100)&gt;&gt;
+&lt;&lt;set $social to Math.clamp($social, 0, 100)&gt;&gt;</tw-passagedata><tw-passagedata pid="3" name="Stats" tags="" position="99,119" size="100,100">&lt;&lt;nobr&gt;&gt; Wealth: $wealth
 &lt;&lt;if $wealth &gt;= 75&gt;&gt; &lt;&lt;set $wr to 4&gt;&gt;
 @@color:#15ff00;You&#39;re rather poor, but better off than your fellows.@@
 &lt;&lt;elseif $wealth &gt;= 50 and $wealth &lt; 75&gt;&gt; &lt;&lt;set $wr to 3&gt;&gt;
@@ -196,17 +214,16 @@ the end of the day.
 &lt;&lt;if $illness&gt;&gt; @@color:#ff0000;You have an illness.@@ &lt;&lt;else&gt;&gt; @@color:#15ff00;You are not sick.@@ &lt;&lt;/if&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
-&lt;&lt;if $famAlive&gt;&gt;
-Family: $family
-&lt;&lt;if $family &gt;= 75&gt;&gt; &lt;&lt;set $fr to 4&gt;&gt;
-@@color:#15ff00;Despite your circumstances, your family bonds remain strong as ever.@@
-&lt;&lt;elseif $family &gt;=50 and $family &lt; 75&gt;&gt; &lt;&lt;set $fr to 3&gt;&gt;
-@@color:#f2ff00;You are beginning to grow distant from your immediate family.@@
-&lt;&lt;elseif $family &gt;=25 and $family &lt; 50&gt;&gt; &lt;&lt;set $fr to 2&gt;&gt;
-@@color:#ffaa00;Infighting is becoming an everyday occurance in your household.@@
-&lt;&lt;elseif $family &gt;=0 and $family &lt; 25&gt;&gt; &lt;&lt;set $fr to 1&gt;&gt;
-@@color:#ff0000;Your familial relationships have been damaged almost beyond repair.@@
-&lt;&lt;/if&gt;&gt; &lt;&lt;else&gt;&gt; Your family is gone. &lt;&lt;/if&gt;&gt;
+Compassion: $compassion
+&lt;&lt;if $compassion &gt;= 75&gt;&gt; &lt;&lt;set $cr to 4&gt;&gt;
+@@color:#15ff00;You&#39;re always looking to help out where you can.@@
+&lt;&lt;elseif $compassion &gt;=50 and $compassion &lt; 75&gt;&gt; &lt;&lt;set $cr to 3&gt;&gt;
+@@color:#f2ff00;You do your best to help your fellows, but you&#39;re only human.@@
+&lt;&lt;elseif $compassion &gt;=25 and $compassion &lt; 50&gt;&gt; &lt;&lt;set $cr to 2&gt;&gt;
+@@color:#ffaa00; You focus on your self and your family first and foremost - all else comes second.@@
+&lt;&lt;elseif $compassion &gt;=0 and $compassion &lt; 25&gt;&gt; &lt;&lt;set $cr to 1&gt;&gt;
+@@color:#ff0000;You couldn&#39;t care less about the suffering of those around you.@@
+&lt;&lt;/if&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
 &lt;&lt;nobr&gt;&gt; Social: $social
 &lt;&lt;if $social &gt;= 75&gt;&gt; &lt;&lt;set $sr to 4&gt;&gt;
@@ -227,7 +244,7 @@ Family: $family
 &lt;&lt;if $famAlive is false&gt;&gt;Your entire family has passed away, leaving you without hope and bereft of purpose.
 &lt;&lt;/if&gt;&gt;
 \
-&lt;&lt;nobr&gt;&gt; Overall State:
+&lt;&lt;nobr&gt;&gt; Overall Status:
 &lt;&lt;switch $state&gt;&gt;
 &lt;&lt;case 4&gt;&gt;
 @@color:#15ff00;While it&#39;s not the easiest life to live, you can still keep your chin held high.@@
@@ -239,6 +256,7 @@ Family: $family
 @@color:#ff0000;You&#39;re past the point of no return. You&#39;re running on instinct, now: there&#39;s nothing you won&#39;t do to survive.@@
 &lt;&lt;/switch&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
+Your overall state shows how desperate you are. A lower state results in higher desperation, which opens up more extreme avenues for survival.
 
 &lt;&lt;back Return&gt;&gt;
 /*
@@ -282,6 +300,8 @@ William N. T. Wylie. &quot;Poverty, Distress, and Disease: Labour and the Constr
 &lt;&lt;set $weekMedBuy to false&gt;&gt;
 &lt;&lt;set $weekPrayed to false&gt;&gt;
 &lt;&lt;set $medQuantity to 0&gt;&gt;
+&lt;&lt;set $strike to false&gt;&gt;
+&lt;&lt;set $wages to 5&gt;&gt;
 
 &lt;&lt;set $state to 4&gt;&gt;
 &lt;&lt;set $wealth to 50&gt;&gt;
@@ -290,6 +310,8 @@ William N. T. Wylie. &quot;Poverty, Distress, and Disease: Labour and the Constr
 &lt;&lt;set $hr to 4&gt;&gt;
 &lt;&lt;set $family to 100&gt;&gt;
 &lt;&lt;set $fr to 4&gt;&gt;
+&lt;&lt;set $compassion to 100&gt;&gt;
+&lt;&lt;set $cr to 4&gt;&gt;
 &lt;&lt;set $social to 80&gt;&gt;
 &lt;&lt;set $sr to 4&gt;&gt;
 &lt;&lt;set $illness to false&gt;&gt;
@@ -329,7 +351,9 @@ Health States: Healthy, Ill, Diseased</tw-passagedata><tw-passagedata pid="6" na
 
 Landmarks:
 Celtic Cross
-</tw-passagedata><tw-passagedata pid="7" name="Home" tags="" position="808,472" size="100,100">&lt;&lt;nobr&gt;&gt;
+Colonel By
+Byward Market
+Notre-Dame Cathedral Basilica</tw-passagedata><tw-passagedata pid="7" name="Home" tags="" position="369,670" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;&lt;if $famAlive is true&gt;&gt;It takes a moment for your eyes to adjust to the dim light as you enter the mud hovel you and your family call home.
 &lt;&lt;switch $foodQuality&gt;&gt;
 &lt;&lt;case 4&gt;&gt;
@@ -381,10 +405,10 @@ and she ignores you as you enter.
 
 &lt;&lt;if $sAlive is true&gt;&gt; $son is out playing with the local children. &lt;&lt;/if&gt;&gt; &lt;&lt;/nobr&gt;&gt;
 
-&lt;&lt;if $daytime is false&gt;&gt;&lt;&lt;link &quot;Rest for the night.&quot; &quot;Dinner&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;else&gt;&gt;You can&#39;t sleep during the day.&lt;&lt;/if&gt;&gt;
+&lt;&lt;link &quot;Rest for the night.&quot; &quot;Dinner&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;
 [[Go Back|Corktown Hub]]</tw-passagedata><tw-passagedata pid="8" name="StoryMenu" tags="" position="101,14" size="100,100">&lt;&lt;if $gameStart&gt;&gt;[[Status|Stats]] 
 [[Family]] &lt;&lt;/if&gt;&gt;
-[[Sources]]</tw-passagedata><tw-passagedata pid="9" name="Canal Work" tags="" position="883,291" size="100,100">You spend the next fifteen hours hard at work. Your shift seems to take forever, and you can feel your limbs growing progressively weary as you work at stone and earth with pick and shovel - only receiving a measure of respite when assisted by the wheelbarrow. Your countrymen laugh and sing during moments of energy and work in dreary silence when that energy wanes, so that the sounds of cracking, clanging, and coughing serve as your accompaniment. None complain.
+[[Sources]]</tw-passagedata><tw-passagedata pid="9" name="Canal Work" tags="" position="964,52" size="100,100">You spend the next fifteen hours hard at work. Your shift seems to take forever, and you can feel your limbs growing progressively weary as you work at stone and earth with pick and shovel - only receiving a measure of respite when assisted by the wheelbarrow. Your countrymen laugh and sing during moments of energy and work in dreary silence when that energy wanes, so that the sounds of cracking, clanging, and coughing serve as your accompaniment. None complain.
 
 &lt;&lt;nobr&gt;&gt;
 When night finally falls and you are released, you are given your daily pay and sent home. 
@@ -409,18 +433,21 @@ You leave with your wages.
 &lt;&lt;if $famAlive is true&gt;&gt;
 &lt;&lt;switch $sr&gt;&gt;
 &lt;&lt;case 4&gt;&gt;
-&lt;&lt;set $wealth += 10&gt;&gt;
+&lt;&lt;set $wealth += ($wages + 5)&gt;&gt;
 &lt;&lt;case 3&gt;&gt;
-&lt;&lt;set $wealth += 8&gt;&gt;
+&lt;&lt;set $wealth += ($wages + 3)&gt;&gt;
 &lt;&lt;case 2&gt;&gt;
-&lt;&lt;set $wealth += 6&gt;&gt;
+&lt;&lt;set $wealth += ($wages + 2)&gt;&gt;
 &lt;&lt;case 1&gt;&gt;
-&lt;&lt;set $wealth += 4&gt;&gt;
+&lt;&lt;set $wealth += $wages&gt;&gt;
 &lt;&lt;/switch&gt;&gt;
-&lt;&lt;else&gt;&gt; &lt;&lt;set $wealth += 4&gt;&gt; &lt;&lt;/if&gt;&gt;&lt;&lt;/link&gt;&gt;
+&lt;&lt;else&gt;&gt; &lt;&lt;set $wealth += $wages&gt;&gt; &lt;&lt;/if&gt;&gt;&lt;&lt;/link&gt;&gt;
 
-&lt;&lt;if $week is 2&gt;&gt;&lt;&lt;goto Choice1&gt;&gt;&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="10" name="Physicality" tags="" position="272,205" size="100,100">&#39;&#39;THIS GAME IS A WORK-IN-PROGRESS AND IS SUBJECT TO CHANGE&#39;&#39;
-Version 0.1
+&lt;&lt;if $week is 2&gt;&gt;&lt;&lt;goto Choice1&gt;&gt;&lt;&lt;/if&gt;&gt;
+&lt;&lt;if $week is 4&gt;&gt;&lt;&lt;goto Choice2&gt;&gt;&lt;&lt;/if&gt;&gt;
+&lt;&lt;if $week is 6&gt;&gt;&lt;&lt;goto Choice3&gt;&gt;&lt;&lt;/if&gt;&gt;
+&lt;&lt;if $week is 7 or $week is 8 and $strike is false&gt;&gt;&lt;&lt;goto Choice3Option2&gt;&gt;&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="10" name="Physicality" tags="" position="272,205" size="100,100">&#39;&#39;THIS GAME IS A WORK-IN-PROGRESS AND IS SUBJECT TO CHANGE&#39;&#39;
+Version 0.2
 
 This is a fictional story, but it is based on the factual lives of Irish Immigrants in nineteenth-century Ottawa. You can click &#39;Sources&#39; on the menu to the left for further reading.
 
@@ -429,13 +456,26 @@ Some choices, shown in green, require a physicality test. To answer these riddle
 Physicality tests will require you enter a certain word to progress. Try it now by entering &#39;begin&#39; below, then hit enter or press &#39;Answer&#39;.
 &lt;&lt;set _choice to $choice &gt;&gt;
 &lt;&lt;if _choice is &quot;begin&quot;&gt;&gt; [[That&#39;s all there is to it.|Intro]]&lt;&lt;elseif _choice is &quot;debug&quot;&gt;&gt;[[Debug mode activated.|Intro][$debug to true]]&lt;&lt;else&gt;&gt;&lt;&lt;textbox &quot;$choice&quot; &quot;&quot; &quot;Physicality&quot; autofocus&gt;&gt; [[Answer|Physicality]]&lt;&lt;/if&gt;&gt;
-</tw-passagedata><tw-passagedata pid="11" name="StoryCaption" tags="" position="342,11" size="100,100">Act $act
+</tw-passagedata><tw-passagedata pid="11" name="StoryCaption" tags="" position="337,11" size="100,100">Act $act
 Week $week
 &lt;&lt;if $daytime is true&gt;&gt;Day&lt;&lt;else&gt;&gt;Night&lt;&lt;/if&gt;&gt;
 
 Wealth: $wealth
+&lt;&lt;nobr&gt;&gt; Status:
+&lt;&lt;switch $state&gt;&gt;
+&lt;&lt;case 4&gt;&gt;
+@@color:#15ff00;Relaxed@@
+&lt;&lt;case 3&gt;&gt;
+@@color:#f2ff00;Weary@@
+&lt;&lt;case 2&gt;&gt;
+@@color:#ffaa00;Desperate@@
+&lt;&lt;case 1&gt;&gt;
+@@color:#ff0000;Broken@@
+&lt;&lt;/switch&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;
+
 &lt;&lt;nobr&gt;&gt;
-&lt;&lt;set $state to Math.round((($wr + $hr + $fr + $sr - 0.25) / 4) - $famDead)&gt;&gt; &lt;&lt;if $state lt 1&gt;&gt;&lt;&lt;set $state to 1&gt;&gt;&lt;&lt;/if&gt;&gt;
+&lt;&lt;set $state to Math.round((($wr + $hr + $cr + $sr - 0.25) / 4) - $famDead)&gt;&gt; &lt;&lt;if $state lt 1&gt;&gt;&lt;&lt;set $state to 1&gt;&gt;&lt;&lt;/if&gt;&gt;
 &lt;&lt;set $wealth to Math.clamp($wealth, 0, 100)&gt;&gt;
 &lt;&lt;set $health to Math.clamp($health, 0, 100)&gt;&gt;
 &lt;&lt;set $family to Math.clamp($family, 0, 100)&gt;&gt;
@@ -548,7 +588,7 @@ Wealth: $wealth
 &lt;&lt;/if&gt;&gt;
 
 &lt;&lt;/nobr&gt;&gt;
-</tw-passagedata><tw-passagedata pid="12" name="Dinner" tags="" position="632,545" size="100,100">&lt;&lt;nobr&gt;&gt; 
+</tw-passagedata><tw-passagedata pid="12" name="Dinner" tags="" position="373,793" size="100,100">&lt;&lt;nobr&gt;&gt; 
 &lt;&lt;if $foodQuality is 1&gt;&gt; There&#39;s nothing to eat. &lt;&lt;else&gt;&gt; You sit down at the dining table.
 &lt;&lt;if $famAlive is true&gt;&gt;
 &lt;&lt;switch $foodQuality&gt;&gt;
@@ -605,7 +645,7 @@ There&#39;s enough.&lt;&lt;/if&gt;&gt;
 \
 &lt;&lt;if $dAlive&gt;&gt;$daughter: $dNeedsDis &lt;&lt;switch $dNeeds&gt;&gt;&lt;&lt;case 3&gt;&gt;@@color:#15ff00;Well-Fed@@&lt;&lt;case 2&gt;&gt;@@color:#f2ff00;Hungry@@&lt;&lt;case 1&gt;&gt;@@color:#ff0000;Starving@@&lt;&lt;case 0&gt;&gt;@@color:#606060;Critical@@&lt;&lt;/switch&gt;&gt;, &lt;&lt;switch $dHealth&gt;&gt;&lt;&lt;case 3&gt;&gt;@@color:#15ff00;Healthy@@&lt;&lt;case 2&gt;&gt;@@color:#f2ff00;Sick@@&lt;&lt;case 1&gt;&gt;@@color:#ff0000;Diseased@@&lt;&lt;case 0&gt;&gt;@@color:#606060;Critical@@&lt;&lt;/switch&gt;&gt;&lt;&lt;else&gt;&gt;$daughter is gone.&lt;&lt;/if&gt;&gt;
 
-&lt;&lt;back Return&gt;&gt;</tw-passagedata><tw-passagedata pid="14" name="Sleep" tags="" position="403,571" size="100,100">&lt;&lt;nobr&gt;&gt;
+&lt;&lt;back Return&gt;&gt;</tw-passagedata><tw-passagedata pid="14" name="Sleep" tags="" position="366,932" size="100,100">&lt;&lt;nobr&gt;&gt;
 You lay your head down and go to sleep, &lt;&lt;if $wAlive is true and $fr gte 3&gt;&gt; with your wife curled up next to you. &lt;&lt;else&gt;&gt; alone. &lt;&lt;/if&gt;&gt; &lt;&lt;/nobr&gt;&gt;
 
 &lt;&lt;nobr&gt;&gt;
@@ -633,35 +673,35 @@ You lay your head down and go to sleep, &lt;&lt;if $wAlive is true and $fr gte 3
 
 /* PLAYER ILLNESS */
 
-&lt;&lt;if $pDiseaseHit &lt;= 10 and $illness is false&gt;&gt; 
+&lt;&lt;if $pDiseaseHit &lt;= 8 and $illness is false&gt;&gt; 
 You have fallen ill.  &lt;&lt;set $famSick += 1&gt;&gt; &lt;&lt;set $illness to true&gt;&gt; 
 
 &lt;&lt;elseif $pDiseaseHit &gt;= (95 - (_medPower / 2)) and $illness is true&gt;&gt; &lt;&lt;set $illness to false&gt;&gt; You are no longer sick. &lt;&lt;set $famSick -= 1&gt;&gt;&lt;&lt;/if&gt;&gt;
 
 /* WIFE ILLNESS */
 
-&lt;&lt;if $wAlive and $wDiseaseHit &lt;= 10 and $wHealth is 3&gt;&gt; 
+&lt;&lt;if $wAlive and $wDiseaseHit &lt;= 8 and $wHealth is 3&gt;&gt; 
 $wife has fallen ill.  &lt;&lt;set $famSick += 1&gt;&gt; &lt;&lt;set $wHealthDis -= 10&gt;&gt; 
 
-&lt;&lt;elseif $wAlive and $wDiseaseHit &lt;= (10 - (_medPower / 5))&gt;&gt; $wife&#39;s condition worsens. &lt;&lt;set $wHealthDis -= 5&gt;&gt;
+&lt;&lt;elseif $wAlive and $wDiseaseHit &lt;= (8 - (_medPower / 5))&gt;&gt; $wife&#39;s condition worsens. &lt;&lt;set $wHealthDis -= 5&gt;&gt;
 
 &lt;&lt;elseif $wAlive and $wDiseaseHit &gt;= (95 - _medPower) and $wHealth isnot 3&gt;&gt; &lt;&lt;set $wHealthDis += 10&gt;&gt; &lt;&lt;if $wHealthDis &gt; 20&gt;&gt; $wife is no longer sick. &lt;&lt;set $famSick -= 1&gt;&gt; &lt;&lt;else&gt;&gt; $wife&#39;s condition improves. &lt;&lt;/if&gt;&gt; &lt;&lt;/if&gt;&gt;
 
 /* SON ILLNESS */
 
-&lt;&lt;if $sAlive and $sDiseaseHit &lt;= 10 and $sHealth is 3&gt;&gt; 
+&lt;&lt;if $sAlive and $sDiseaseHit &lt;= 8 and $sHealth is 3&gt;&gt; 
 $son has fallen ill.  &lt;&lt;set $famSick += 1&gt;&gt; &lt;&lt;set $sHealthDis -= 10&gt;&gt; 
 
-&lt;&lt;elseif $sAlive and $sDiseaseHit &lt;= (10 - (_medPower / 5))&gt;&gt; $son&#39;s condition worsens. &lt;&lt;set $sHealthDis -= 5&gt;&gt;
+&lt;&lt;elseif $sAlive and $sDiseaseHit &lt;= (8 - (_medPower / 5))&gt;&gt; $son&#39;s condition worsens. &lt;&lt;set $sHealthDis -= 5&gt;&gt;
 
 &lt;&lt;elseif $sAlive and $sDiseaseHit &gt;= (95 - _medPower) and $sHealth isnot 3&gt;&gt; &lt;&lt;set $sHealthDis += 10&gt;&gt; &lt;&lt;if $sHealthDis &gt; 20&gt;&gt; $son is no longer sick. &lt;&lt;set $famSick -= 1&gt;&gt; &lt;&lt;else&gt;&gt; $son&#39;s condition improves. &lt;&lt;/if&gt;&gt; &lt;&lt;/if&gt;&gt;
 
 /* DAUGHTER ILLNESS */
 
-&lt;&lt;if $dAlive and $dDiseaseHit &lt;= 10 and $dHealth is 3&gt;&gt; 
+&lt;&lt;if $dAlive and $dDiseaseHit &lt;= 8 and $dHealth is 3&gt;&gt; 
 $daughter has fallen ill.  &lt;&lt;set $famSick += 1&gt;&gt; &lt;&lt;set $dHealthDis -= 10&gt;&gt; 
 
-&lt;&lt;elseif $dAlive and $dDiseaseHit &lt;= (10 - (_medPower / 5))&gt;&gt; $daughter&#39;s condition worsens. &lt;&lt;set $dHealthDis -= 5&gt;&gt;
+&lt;&lt;elseif $dAlive and $dDiseaseHit &lt;= (8 - (_medPower / 5))&gt;&gt; $daughter&#39;s condition worsens. &lt;&lt;set $dHealthDis -= 5&gt;&gt;
 
 &lt;&lt;elseif $dAlive and $dDiseaseHit &gt;= (95 - _medPower) and $dHealth isnot 3&gt;&gt; &lt;&lt;set $dHealthDis += 10&gt;&gt; &lt;&lt;if $dHealthDis &gt; 20&gt;&gt; $daughter is no longer sick. &lt;&lt;set $famSick -= 1&gt;&gt; &lt;&lt;else&gt;&gt; $daughter&#39;s condition improves. &lt;&lt;/if&gt;&gt; &lt;&lt;/if&gt;&gt;
 
@@ -671,7 +711,11 @@ $daughter has fallen ill.  &lt;&lt;set $famSick += 1&gt;&gt; &lt;&lt;set $dHealt
 
 &lt;&lt;/nobr&gt;&gt;
 &lt;&lt;if $health gt 0&gt;&gt;
-&lt;&lt;if $deathFlag&gt;&gt;[[Something&#39;s wrong...|Family Death]]&lt;&lt;else&gt;&gt;[[Get ready for work.|Corktown Hub]]&lt;&lt;/if&gt;&gt;
+&lt;&lt;if $deathFlag&gt;&gt;[[Something&#39;s wrong...|Family Death]]
+&lt;&lt;elseif $week is 8&gt;&gt;[[Get up.|Strike End]]
+&lt;&lt;elseif $week is 13&gt;&gt;[[Get up.|End of Act 1]]
+&lt;&lt;else&gt;&gt;[[Get up.|Corktown Hub]]
+&lt;&lt;/if&gt;&gt;
 
 &lt;&lt;set $daytime to true&gt;&gt;
 &lt;&lt;set $week += 1&gt;&gt;
@@ -681,26 +725,26 @@ $daughter has fallen ill.  &lt;&lt;set $famSick += 1&gt;&gt; &lt;&lt;set $dHealt
 &lt;&lt;set $medQuality to 1&gt;&gt;
 &lt;&lt;else&gt;&gt;\
 
-[[You don&#39;t wake up.|Player Death]]&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="15" name="Store" tags="" position="416,345" size="100,100">You enter the local store, erected by your contractor to provide for the needs of the members of your community. The shopkeep gives you a welcoming smile.
+[[You don&#39;t wake up.|Player Death]]&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="15" name="Store" tags="" position="126,553" size="100,100">You enter the local store, erected by your contractor to provide for the needs of the members of your community. The shopkeep gives you a welcoming smile.
 \
 \
 &lt;&lt;if $weekFoodBuy is false&gt;&gt;
 &lt;&lt;if $wealth gte 15&gt;&gt;\
-&lt;&lt;link &quot;Buy a week&#39;s worth of plentiful, varied food. (5 Wealth each)&quot; &quot;Store&quot;&gt;&gt;\
-&lt;&lt;set $weekFoodBuy to true&gt;&gt;&lt;&lt;set $foodQuality to 4&gt;&gt;&lt;&lt;set $wealth -= (5 * (4 - $famDead))&gt;&gt;\
+&lt;&lt;link &quot;Buy a week&#39;s worth of plentiful, varied food. (4 Wealth each)&quot; &quot;Store&quot;&gt;&gt;\
+&lt;&lt;set $weekFoodBuy to true&gt;&gt;&lt;&lt;set $foodQuality to 4&gt;&gt;&lt;&lt;set $wealth -= (4 * (4 - $famDead))&gt;&gt;\
 &lt;&lt;/link&gt;&gt;\
 &lt;&lt;else&gt;&gt;\
 Buy a week&#39;s worth of plentiful, varied food. (Cannot Afford)&lt;&lt;/if&gt;&gt;
 \
 &lt;&lt;if $wealth gte 10&gt;&gt;\
-&lt;&lt;link &quot;Buy a week&#39;s worth of basic foodstuffs. (3 Wealth each)&quot; &quot;Store&quot;&gt;&gt;\
-&lt;&lt;set $weekFoodBuy to true&gt;&gt;&lt;&lt;set $foodQuality to 3&gt;&gt;&lt;&lt;set $wealth -= (3 * (4 - $famDead))&gt;&gt;&lt;&lt;/link&gt;&gt;\
+&lt;&lt;link &quot;Buy a week&#39;s worth of basic foodstuffs. (2 Wealth each)&quot; &quot;Store&quot;&gt;&gt;\
+&lt;&lt;set $weekFoodBuy to true&gt;&gt;&lt;&lt;set $foodQuality to 3&gt;&gt;&lt;&lt;set $wealth -= (2 * (4 - $famDead))&gt;&gt;&lt;&lt;/link&gt;&gt;\
 &lt;&lt;else&gt;&gt;\
 Buy a week&#39;s worth of basic foodstuffs. (Cannot Afford)&lt;&lt;/if&gt;&gt;
 \
 &lt;&lt;if $wealth gte 5&gt;&gt;\
-&lt;&lt;link &quot;Buy a few day&#39;s worth of basic foodstuffs. (2 Wealth each)&quot; &quot;Store&quot;&gt;&gt;\
-&lt;&lt;set $weekFoodBuy to true&gt;&gt;&lt;&lt;set $foodQuality to 2&gt;&gt;&lt;&lt;set $wealth -= (2 * (4 - $famDead))&gt;&gt;&lt;&lt;/link&gt;&gt;\
+&lt;&lt;link &quot;Buy a few day&#39;s worth of basic foodstuffs. (1 Wealth each)&quot; &quot;Store&quot;&gt;&gt;\
+&lt;&lt;set $weekFoodBuy to true&gt;&gt;&lt;&lt;set $foodQuality to 2&gt;&gt;&lt;&lt;set $wealth -= (1 * (4 - $famDead))&gt;&gt;&lt;&lt;/link&gt;&gt;\
 &lt;&lt;else&gt;&gt;\
 Buy a few day&#39;s worth of basic foodstuffs. (Cannot Afford) &lt;&lt;/if&gt;&gt;
 &lt;&lt;else&gt;&gt;
@@ -713,16 +757,16 @@ You&#39;ve already bought food for the week.
 &lt;&lt;/if&gt;&gt;\
 &lt;&lt;if $famSick gte 1&gt;&gt;\
 &lt;&lt;if $weekMedBuy is false&gt;&gt;\
-&lt;&lt;if $wealth gte (20 * $famSick)&gt;&gt;\
-&lt;&lt;link &quot;Buy medicine. (20 Wealth each)&quot; &quot;Store&quot;&gt;&gt;\
-&lt;&lt;set $weekMedBuy to true&gt;&gt;&lt;&lt;set $medQuality += 6&gt;&gt;&lt;&lt;set $wealth -= (20 * $famSick)&gt;&gt;\
+&lt;&lt;if $wealth gte (15 * $famSick)&gt;&gt;\
+&lt;&lt;link &quot;Buy medicine. (15 Wealth each)&quot; &quot;Store&quot;&gt;&gt;\
+&lt;&lt;set $weekMedBuy to true&gt;&gt;&lt;&lt;set $medQuality += 6&gt;&gt;&lt;&lt;set $wealth -= (15 * $famSick)&gt;&gt;\
 &lt;&lt;/link&gt;&gt;\
 &lt;&lt;else&gt;&gt;\
 Buy medicine. (Cannot Afford) &lt;&lt;/if&gt;&gt;
 \
 &lt;&lt;if $wealth gte (10 * $famSick)&gt;&gt;\
-&lt;&lt;link &quot;Buy the ingredients for simple home remedies. (10 Wealth each)&quot; &quot;Store&quot;&gt;&gt;\
-&lt;&lt;set $weekMedBuy to true&gt;&gt;&lt;&lt;set $medQuality += 3&gt;&gt;&lt;&lt;set $wealth -= (10 * $famSick)&gt;&gt;&lt;&lt;/link&gt;&gt;\
+&lt;&lt;link &quot;Buy the ingredients for simple home remedies. (8 Wealth each)&quot; &quot;Store&quot;&gt;&gt;\
+&lt;&lt;set $weekMedBuy to true&gt;&gt;&lt;&lt;set $medQuality += 3&gt;&gt;&lt;&lt;set $wealth -= (8 * $famSick)&gt;&gt;&lt;&lt;/link&gt;&gt;\
 &lt;&lt;else&gt;&gt;\
 Buy the ingredients for simple home remedies. (Cannot Afford)&lt;&lt;/if&gt;&gt;
 &lt;&lt;else&gt;&gt;\
@@ -734,29 +778,25 @@ You don&#39;t need medicine, as no-one in your family is sick.
 
 [[Go Back|Corktown Hub]]
 
-&lt;&lt;set _medCost to 20 * $famSick&gt;&gt;</tw-passagedata><tw-passagedata pid="16" name="Church" tags="" position="536,709" size="100,100">You enter Corktown&#39;s humble catholic church. Many would call it ramshackle, but beauty is in the eye of the beholder - and it is clear more effort has gone into this one building than most of the sod huts the workers and their families live in.
+&lt;&lt;set _medCost to 20 * $famSick&gt;&gt;</tw-passagedata><tw-passagedata pid="16" name="Church" tags="" position="119,679" size="100,100">You enter Corktown&#39;s humble catholic church. Many would call it ramshackle, but beauty is in the eye of the beholder - and it is clear more effort has gone into this one building than most of the sod huts the workers and their families live in.
 
 &lt;&lt;nobr&gt;&gt;
 &lt;&lt;if $famSick gte 1 and $weekPrayed is false&gt;&gt;\
 &lt;&lt;link &quot;Pray for your family&#39;s health.&quot; &quot;Church&quot;&gt;&gt;&lt;&lt;set $medQuality += 1&gt;&gt;&lt;&lt;set $weekPrayed to true&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;elseif $weekPrayed is true&gt;&gt; You pray for a swift recovery to this illness.&lt;&lt;elseif $famSick is 0&gt;&gt;
 Mercifully, no-one in your family is sick.&lt;&lt;/if&gt;&gt; &lt;&lt;/nobr&gt;&gt;
 
-[[Go Back|Corktown Hub]] </tw-passagedata><tw-passagedata pid="17" name="Family Death" tags="" position="112,662" size="100,100">&lt;&lt;if $wAlive is true and $wHealth is 0 or $wAlive is true and $wNeeds is 0&gt;&gt; $wife has died. &lt;&lt;set $wAlive to false&gt;&gt;&lt;&lt;set $famDead += 1&gt;&gt;&lt;&lt;if $wHealth isnot 3&gt;&gt;&lt;&lt;set $famSick -= 1&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/if&gt;&gt;\
+[[Go Back|Corktown Hub]] </tw-passagedata><tw-passagedata pid="17" name="Family Death" tags="" position="235,1072" size="100,100">&lt;&lt;if $wAlive is true and $wHealth is 0 or $wAlive is true and $wNeeds is 0&gt;&gt; $wife has died. &lt;&lt;set $wAlive to false&gt;&gt;&lt;&lt;set $famDead += 1&gt;&gt;&lt;&lt;if $wHealth isnot 3&gt;&gt;&lt;&lt;set $famSick -= 1&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/if&gt;&gt;\
 &lt;&lt;if $sAlive is true and $sHealth is 0 or $sAlive is true and $sNeeds is 0&gt;&gt; $son has died. &lt;&lt;set $sAlive to false&gt;&gt;&lt;&lt;set $famDead += 1&gt;&gt;&lt;&lt;if $sHealth isnot 3&gt;&gt;&lt;&lt;set $famSick -= 1&gt;&gt;&lt;&lt;/if&gt;&gt; &lt;&lt;/if&gt;&gt;\
 &lt;&lt;if $dAlive is true and $dHealth is 0 or $dAlive is true and $dNeeds is 0&gt;&gt; $daughter has died. &lt;&lt;set $dAlive to false&gt;&gt;&lt;&lt;set $famDead += 1&gt;&gt;&lt;&lt;if $dHealth isnot 3&gt;&gt;&lt;&lt;set $famSick -= 1&gt;&gt;&lt;&lt;/if&gt;&gt; &lt;&lt;/if&gt;&gt;\
 &lt;&lt;if $wAlive is false and $sAlive is false and $dAlive is false&gt;&gt; &lt;&lt;set $famAlive to false&gt;&gt;&lt;&lt;/if&gt;&gt;
 
-[[Eternal rest, grant unto them, O Lord...|Corktown Hub][$deathFlag to false]] </tw-passagedata><tw-passagedata pid="18" name="TEST HERE" tags="" position="264,365" size="100,100">[[Corktown Hub]]
+[[Eternal rest, grant unto them, O Lord...|Corktown Hub][$deathFlag to false]] </tw-passagedata><tw-passagedata pid="18" name="TEST HERE" tags="" position="260,365" size="100,100">[[Corktown Hub]]
 
-&lt;&lt;set $wNeedsDis to 10&gt;&gt;
-&lt;&lt;set $wNeedsDis to 10&gt;&gt;
-&lt;&lt;set $wNeedsDis to 10&gt;&gt;
+&lt;&lt;set $act to 2&gt;&gt;</tw-passagedata><tw-passagedata pid="19" name="Player Death" tags="" position="491,1063" size="100,100">You have died.</tw-passagedata><tw-passagedata pid="20" name="Choice1" tags="Act-1" position="1193,61" size="100,100">As you shovel away wet soil to the sound of distant thundercracks of dynamite, you notice one of your companions beginning to falter. He grows progressively more weary, until finally he vomits out a clear, whitish fluid, and collapses into a puddle of muddy water. You recognize him as one of your diseased fellows - without getting him hydrated quickly, he could die in a matter of hours. But little is known of how this disease spreads, and trying to help him yourself could put you at risk. You have to think quickly.
 
-</tw-passagedata><tw-passagedata pid="19" name="Player Death" tags="" position="105,805" size="100,100">You have died.</tw-passagedata><tw-passagedata pid="20" name="Choice1" tags="" position="1298,14" size="100,100">As you shovel away wet soil to the sound of distant thundercracks of dynamite, you notice one of your companions beginning to falter. He grows progressively more weary, until finally he vomits out a clear, whitish fluid, and collapses into a puddle of muddy water. You recognize him as one of your diseased fellows - without getting him hydrated quickly, he could die in a matter of hours. But little is known of how this disease spreads, and trying to help him yourself could put you at risk. You have to think quickly.
-
-&lt;a data-passage=&quot;Choice1Option3Test&quot; class=&quot;phys&quot;&gt;&lt;span&gt;Get help, and find some gloves.&lt;/span&gt;&lt;/a&gt;
-&lt;&lt;if $state gte 3&gt;&gt;&lt;&lt;link &quot;(State $state/3) Carry the worker to safety.&quot; &quot;Choice1Option1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;else&gt;&gt;&quot;(State $state/3) Carry the worker to safety.&quot; &lt;&lt;/if&gt;&gt;
-[[Leave him be.|Choice1Option2]]</tw-passagedata><tw-passagedata pid="21" name="Choice1Option1" tags="" position="1153,138" size="100,100">You hurry over and throw the debilitated Irishman over your shoulders, hurrying to the local priest. That same clear, white fluid is seeping from his trousers, but you try not to pay it any mind. The priest is surprised at your sudden delivery, but grateful - he tells you that you might have saved the poor man&#39;s life. Satisfied with a job well done, you return to work - oblivious to your contamination.
+&lt;a data-passage=&quot;Choice1Option3Test&quot; class=&quot;phys&quot;&gt;&lt;span&gt;Get help.&lt;/span&gt;&lt;/a&gt;
+&lt;&lt;if $state gte 3&gt;&gt;&lt;&lt;link &quot;Carry the worker to safety.&quot; &quot;Choice1Option1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;else&gt;&gt;(Min: Weary) Carry the worker to safety. &lt;&lt;/if&gt;&gt;
+[[Leave him be.|Choice1Option2]]</tw-passagedata><tw-passagedata pid="21" name="Choice1Option1" tags="" position="1316,64" size="100,100">You hurry over and throw the debilitated Irishman over your shoulders, hurrying to the local priest. That same clear, white fluid is seeping from his trousers, but you try not to pay it any mind. The priest is surprised at your sudden delivery, but grateful - he tells you that you might have saved the poor man&#39;s life. Satisfied with a job well done, you return to work - oblivious to your contamination.
 
 &lt;&lt;nobr&gt;&gt;
 When night finally falls and you are released, you are given your daily pay and sent home. 
@@ -784,7 +824,8 @@ You leave with your wages. &lt;&lt;set $wealth += 4&gt;&gt;
 [[Head Home|Corktown Hub][$health -= 3]] 
 
 &lt;&lt;set $illness to 1&gt;&gt;\
-&lt;&lt;set $social += 10&gt;&gt;\</tw-passagedata><tw-passagedata pid="22" name="Choice1Option2" tags="" position="1297,142" size="100,100">You ignore him. It&#39;s not worth the risk of infection, and someone will surely find him before you do - but you find your apathy has distanced you, however imperceptably, from your countrymen.
+&lt;&lt;set $social += 10&gt;&gt;\
+&lt;&lt;set $compassion += 10&gt;&gt;\</tw-passagedata><tw-passagedata pid="22" name="Choice1Option2" tags="" position="1448,64" size="100,100">You ignore him. It&#39;s not worth the risk of infection, and someone will surely find him before you do - but you find your apathy has distanced you, however imperceptably, from your countrymen.
 
 &lt;&lt;nobr&gt;&gt;
 When night finally falls and you are released, you are given your daily pay and sent home. 
@@ -811,14 +852,15 @@ You leave with your wages. &lt;&lt;set $wealth += 4&gt;&gt;
 
 [[Head Home|Corktown Hub][$health -= 3]] 
 
-&lt;&lt;set $social -= 10&gt;&gt;</tw-passagedata><tw-passagedata pid="23" name="Choice1Option3Test" tags="phystest" position="1453,146" size="100,100">Found on the Rideau and built to deny
+&lt;&lt;set $social -= 5&gt;&gt;
+&lt;&lt;set $compassion -= 10&gt;&gt;</tw-passagedata><tw-passagedata pid="23" name="Choice1Option3Test" tags="phystest" position="1566,72" size="100,100">Found on the Rideau and built to deny
 I can part for your ships, or bind happy lives
 Damming up waters, or parting for love,
 I keep what needs keeping, keys rain from above
 What am I?
 &lt;&lt;set _choice to $choice &gt;&gt;
 &lt;&lt;if _choice is &quot;lock&quot; or _choice is &quot;locks&quot; or _choice is &quot;a lock&quot;&gt;&gt; [[Correct|Choice1Option3]]&lt;&lt;else&gt;&gt;&lt;&lt;textbox &quot;$choice&quot; &quot;&quot; &quot;Choice1Option3Test&quot; autofocus&gt;&gt; [[Answer|Choice1Option3Test]]&lt;&lt;/if&gt;&gt;
-[[Back|Choice1]]</tw-passagedata><tw-passagedata pid="24" name="Choice1Option3" tags="" position="1605,141" size="100,100">You hurry to find your companions. After finding some resting workers, you quickly explain the situation - and before you all hurry back, you find some old gloves and follow suit. Together, you bring the moaning, dehydrated Irishman to a priest. A good result - your peers are grateful for your watchfulness, and you managed to avoid contracting the disease.
+[[Back|Choice1]]</tw-passagedata><tw-passagedata pid="24" name="Choice1Option3" tags="" position="1569,187" size="100,100">You hurry to find your companions. After finding some resting workers, you quickly explain the situation - and before you all hurry back, you find some old gloves and follow suit. Together, you bring the moaning, dehydrated Irishman to a priest. A good result - your peers are grateful for your watchfulness, and you managed to avoid contracting the disease.
 
 &lt;&lt;nobr&gt;&gt;
 When night finally falls and you are released, you are given your daily pay and sent home. 
@@ -827,29 +869,168 @@ When night finally falls and you are released, you are given your daily pay and 
 &lt;&lt;switch $sr&gt;&gt;
 &lt;&lt;case 4&gt;&gt;
 Your fellow workers insist on sharing some of their earnings with you, on account of your family.
-&lt;&lt;set $wealth += 10&gt;&gt;
+&lt;&lt;set $wealth += ($wages + 5)&gt;&gt;
 &lt;&lt;case 3&gt;&gt;
 Your fellow workers donate what earnings they can spare to you, to better help you take care of your family.
-&lt;&lt;set $wealth += 8&gt;&gt;
+&lt;&lt;set $wealth += ($wages + 3)&gt;&gt;
 &lt;&lt;case 2&gt;&gt;
 A few friends offer you some of their wages to help supplement your own.
-&lt;&lt;set $wealth += 6&gt;&gt;
+&lt;&lt;set $wealth += ($wages + 2)&gt;&gt;
 &lt;&lt;case 1&gt;&gt;
 No-one steps up to offer you a portion of their wages, and you don&#39;t dare ask.
-&lt;&lt;set $wealth += 4&gt;&gt;
+&lt;&lt;set $wealth += $wages&gt;&gt;
 &lt;&lt;/switch&gt;&gt;
 &lt;&lt;else&gt;&gt;
-You leave with your wages. &lt;&lt;set $wealth += 4&gt;&gt;
+You leave with your wages. &lt;&lt;set $wealth += $wages&gt;&gt;
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
 
 [[Head Home|Corktown Hub][$health -= 3]] 
 
-&lt;&lt;set $social += 10&gt;&gt;</tw-passagedata><tw-passagedata pid="25" name="Choice2" tags="" position="1888,18" size="100,100">
+&lt;&lt;set $social += 10&gt;&gt;
+&lt;&lt;set $compassion += 5&gt;&gt;</tw-passagedata><tw-passagedata pid="25" name="Choice2" tags="Act-1" position="1734,70" size="100,100">As you&#39;re heading home, you&#39;re waylaid by a stout, scraggly man you quickly identify as Matthew, one of Corktown&#39;s recognizable drunkards. His usual jovial, happy demeanor - if perhaps obnoxious at times - is nowhere to be seen. Instead, he lurches up to you, grasping your sleeve with desperate eyes.
 
-*Insist your family start drinking from cleaner water sources.
-Demand your family cease interacting with the diseased.
-Allow your family to continue interacting with the diseased.</tw-passagedata></tw-storydata>
+&quot;$pc,&quot; He asks, glancing over his shoulder. &quot;$pc, please. I need some money. I&#39;m shamed to be asking you like this, but they kicked me out - fired me - tossed me inna dirt. I&#39;ll starve. I- I just need a little loan. Just enough to last me a week or two to find somewhere to earn my coin.&quot;
+
+&lt;&lt;if $wealth gte 30&gt;&gt;[[(30 Wealth) Give him a generous donation|Choice2Option1]]&lt;&lt;else&gt;&gt;(30 Wealth) Give him a generous donation&lt;&lt;/if&gt;&gt;
+&lt;&lt;if $wealth gte 10&gt;&gt;[[(10 Wealth) Give him a token donation|Choice2Option2]]&lt;&lt;else&gt;&gt;(10 Wealth) Give him a token donation&lt;&lt;/if&gt;&gt;
+[[Give him nothing|Choice2Option3]]
+
+&lt;&lt;if $famAlive is true&gt;&gt;
+&lt;&lt;switch $sr&gt;&gt;
+&lt;&lt;case 4&gt;&gt;
+&lt;&lt;set $wealth += ($wages + 5)&gt;&gt;
+&lt;&lt;case 3&gt;&gt;
+&lt;&lt;set $wealth += ($wages + 3)&gt;&gt;
+&lt;&lt;case 2&gt;&gt;
+&lt;&lt;set $wealth += ($wages + 2)&gt;&gt;
+&lt;&lt;case 1&gt;&gt;
+&lt;&lt;set $wealth += $wages&gt;&gt;
+&lt;&lt;/switch&gt;&gt;
+&lt;&lt;else&gt;&gt; &lt;&lt;set $wealth += $wages&gt;&gt; &lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="26" name="ChoiceUND1" tags="Act-2" position="797,844" size="100,100">A new priest has begun to preach in town. The Prots of Uppertown have taken too much, he cries - and in their arrogance they turn a blind eye to our suffering, to the flickering lives of our wives and children. We are due, he swears, for a reckoning. His methods are violent and seductive, and your countrymen flock to his promises of fire and righteous punishment, leaving your more moderate minister in the dust. $wife urges you to keep away from the newcomer&#39;s violent rhetoric, lest you put the family at risk.
+
+[[Switch to the new, revolutionary priest.|Choice7Option1]]
+[[Stick with your moderate priest.|Choice7Option2]]
+
+
+</tw-passagedata><tw-passagedata pid="27" name="Choice7Option1" tags="" position="937,849" size="100,100">You are swayed into the flock of the firebrand, encouraged by your peers. Your $wife disapproves, but after a few heated discussions, she lets the subject die.
+
+[[Corktown Hub]] 
+
+&lt;&lt;set $social += 10&gt;&gt;
+&lt;&lt;set $compassion -= 10&gt;&gt;</tw-passagedata><tw-passagedata pid="28" name="Choice7Option2" tags="" position="914,977" size="100,100">You elect to remain loyal to the priest that had provided you guidance and succor for these hard few years - but your fellow labourers note your absence, and begin to doubt your conviction.
+
+[[Corktown Hub]]
+
+&lt;&lt;set $social -= 10&gt;&gt;
+&lt;&lt;set $compassion += 10&gt;&gt;</tw-passagedata><tw-passagedata pid="29" name="Choice2Option1" tags="" position="1847,76" size="100,100">You guide Matthew home, where you fish out a generous portion of your savings and offer them to him. He opens the bag, stunned, like a child on Christmas day. &quot;All- all this? Are you sure?&quot; he asks, hugging the purse close to his chest. &quot;You&#39;re a saint, $pc - a saint. I&#39;m gonna tell everyone about this. You&#39;ve saved me life, you have.&quot;
+
+[[Continue|Corktown Hub]]
+
+&lt;&lt;set $social += 10&gt;&gt;
+&lt;&lt;set $compassion += 15&gt;&gt;
+&lt;&lt;set $wealth -= 30&gt;&gt;</tw-passagedata><tw-passagedata pid="30" name="Choice2Option2" tags="" position="1971,77" size="100,100">You reach into your coat and withdraw your day&#39;s earnings, and hand him half. He gives you a grateful smile as he pockets your coin. &quot;Bless you, $pc - this should keep food in my belly for a few days at least,&quot; he says, hurrying off to waylay another labourer. You sigh - hopefully he wasn&#39;t just begging for whiskey money.
+
+[[Continue|Corktown Hub]]
+
+&lt;&lt;set $social += 5&gt;&gt;
+&lt;&lt;set $compassion += 5&gt;&gt;
+&lt;&lt;set $wealth -= 15&gt;&gt;</tw-passagedata><tw-passagedata pid="31" name="Choice2Option3" tags="" position="2096,81" size="100,100">&lt;&lt;nobr&gt;&gt;
+&lt;&lt;if $wealth gte 10&gt;&gt;
+&lt;&lt;set $social -=5&gt;&gt;
+&lt;&lt;set $compassion -=10&gt;&gt;
+You shake your head and wave him off. He doesn&#39;t take the bait. &quot;Come on, $pc, just a few coins is all I need! It&#39;s all I ask!&quot; You figure it&#39;s so he can buy more whiskey, and as soon as the words leave your lips his desperate smile turns into a scowl.
+
+&quot;A heartless miser is what you are,&quot; he swears, sizing you up.
+&lt;&lt;if $health gte 50&gt;&gt; Seeing as you&#39;re clearly in better shape than he is, he spits by your feet and marches off to harrass someone else. &lt;&lt;else&gt;&gt; Seeing as you&#39;re in about the same condition as he&#39;s in, he eyes your pockets, hands balling up into fists. &quot;Don&#39;t,&quot; you murmur, narrowing your eyes. He seems to consider, for a moment, then spits by your feet and marches off to harrass someone else. &lt;&lt;/if&gt;&gt;
+
+&lt;&lt;else&gt;&gt; 
+&lt;&lt;set $social -=5&gt;&gt;
+&lt;&lt;set $compassion -=5&gt;&gt;
+You shake your head and wave him off, explaining you can barely afford to provide for your family. He doesn&#39;t take the bait. &quot;Come on, $pc, just a few coins is all I need! It&#39;s all I ask!&quot; You again remind him that you have nothing to spare, less you let your family starve. Though he doesn&#39;t seem to fully believe you, he at least lets you go without much more of a fuss, and starts making way to another labourer.
+&lt;&lt;/if&gt;&gt;&lt;&lt;/nobr&gt;&gt;
+
+[[Head home|Corktown Hub]]
+
+</tw-passagedata><tw-passagedata pid="32" name="Choice3" tags="" position="2316,85" size="100,100">The canal workers have called a strike in response to poor wages and treatment. Irish or French, your fellow labourers are all making it very clear that no-one gets paid until everyone does - but that&#39;s not exactly an easy pill to swallow for everyone. You can participate in the strike, or you can work regardless - but doing so will likely damage your reputation.
+
+&lt;&lt;if $state gte 2&gt;&gt;[[Join the strike.|Choice3Option1]]&lt;&lt;else&gt;&gt;(Min: Desperate) Join the strike.&lt;&lt;/if&gt;&gt; 
+[[Work.|Choice3Option2]]</tw-passagedata><tw-passagedata pid="33" name="Choice3Option1" tags="" position="2440,85" size="100,100">You join the majority of your community in your strike for improved wages and better living conditions. You&#39;ll have to live off your savings for a few weeks - hopefully it will be worth it.
+
+[[Continue|Corktown Hub]]
+
+&lt;&lt;set $strike to true&gt;&gt;
+&lt;&lt;set $social += 5&gt;&gt;</tw-passagedata><tw-passagedata pid="34" name="Choice3Option2" tags="" position="2563,94" size="100,100">You spend the next fifteen hours hard at work. Your shift seems to take forever, and you can feel your limbs growing progressively weary as you work at stone and earth with pick and shovel - only receiving a measure of respite when assisted by the wheelbarrow. You are one of the few workers still employed during the strike, and while progress has slowed to a crawl, you are at least being paid. 
+
+When night finally falls and you are released, you are given your daily pay and sent home, ignoring the spiteful looks cast by your companions. 
+
+&lt;&lt;link &quot;Head Home&quot; &quot;Corktown Hub&quot;&gt;&gt;&lt;&lt;set $health -=3&gt;&gt;
+&lt;&lt;set $wealth += 4&gt;&gt;&lt;&lt;set $social -= 5&gt;&gt;&lt;&lt;/link&gt;&gt;
+</tw-passagedata><tw-passagedata pid="35" name="Strike End" tags="" position="2434,214" size="100,100">After weeks of gruelling striking, your employers have finally elected to improve your working conditions and your pay.
+
+&lt;&lt;if $strike is true&gt;&gt; You can finally start making money again. &lt;&lt;set $social += 10&gt;&gt; &lt;&lt;else&gt;&gt; Your fellow labourers resent you for reaping the rewards of a strike you didn&#39;t participate in. &lt;&lt;set $social -= 10&gt;&gt;&lt;&lt;/if&gt;&gt;
+
+&lt;a data-passage=&quot;Choice3StrikeTest&quot; class=&quot;phys&quot;&gt;&lt;span&gt;Large wage increase.&lt;/span&gt;&lt;/a&gt;
+&lt;&lt;link &quot;Small wage increase.&quot; &quot;Corktown Hub&quot;&gt;&gt;&lt;&lt;set $wages to 6&gt;&gt;&lt;&lt;set $strike to false&gt;&gt;&lt;&lt;/link&gt;&gt;
+
+</tw-passagedata><tw-passagedata pid="36" name="Choice3StrikeTest" tags="" position="2566,219" size="100,100">TEMPORARY ANSWER IS BOAT
+
+&lt;&lt;set _choice to $choice &gt;&gt;
+&lt;&lt;if _choice is &quot;boat&quot;&gt;&gt;&lt;&lt;link &quot;Large Wage Increase&quot; &quot;Corktown Hub&quot;&gt;&gt;&lt;&lt;set $wages to 8&gt;&gt;&lt;&lt;set $strike to false&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;else&gt;&gt;&lt;&lt;textbox &quot;$choice&quot; &quot;&quot; &quot;Choice3StrikeTest&quot; autofocus&gt;&gt; [[Answer|Choice3StrikeTest]]&lt;&lt;/if&gt;&gt;
+[[Back|Strike End]]</tw-passagedata><tw-passagedata pid="37" name="End of Act 1" tags="" position="2783,103" size="100,100">As the weeks and months pass by, progress on the Rideau becomes increasingly noticable. In the year 1832, your hard work pays off, and the canal is complete. While this may have thrilled the planners and dreamers, it has nearly driven your town apart. Where to go? How to live? Without the canals as a source of labour, it seems the only employers willing to hire you are in the logging industry - and even then, &#39;willing&#39; is being used generously.
+
+[[A new era.|Corktown Hub]]
+
+&lt;&lt;set $act to 2&gt;&gt;</tw-passagedata><tw-passagedata pid="38" name="Jobhunt" tags="" position="1108,217" size="100,100">&lt;&lt;nobr&gt;&gt; You spend the day looking for work, focusing your efforts on the local logging camps.
+
+&lt;&lt;set _jobHunt to random(10)&gt;&gt;
+
+&lt;&lt;if _jobHunt lte 7&gt;&gt;
+Try as you might, you cannot find any meaningful employment - the logging companies refuse to hire an Irish worker when they can spend those wages on good French Canadian labour instead. After a day of fruitless searching, you return home, unsucessful.
+&lt;&lt;else&gt;&gt;
+Luckily, you manage to fill in for a sick labourer at a logging camp, and spend most of the day hard at work. You receive meagre sum at the end of the day, and can only hope you&#39;ll be able to find employment again soon.
+&lt;&lt;set $wealth += 5&gt;&gt;
+&lt;&lt;/if&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;
+
+[[Continue|Corktown Hub]] 
+
+&lt;&lt;set $daytime to false&gt;&gt;</tw-passagedata><tw-passagedata pid="39" name="Look For Work" tags="" position="863,390" size="100,100">You set out to earn a living. Honest work is hard to come by these days.
+
+[[Look for honest work|Jobhunt]]
+[[Mooch]]
+&lt;&lt;if $state lte 3&gt;&gt;&lt;&lt;link &quot;Beg&quot; &quot;Beg&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;else&gt;&gt;(Max: Weary) Beg&lt;&lt;/if&gt;&gt;
+&lt;&lt;if $state lte 2&gt;&gt;&lt;&lt;link &quot;Steal&quot; &quot;Steal&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;else&gt;&gt;(Max: Desperate) Steal&lt;&lt;/if&gt;&gt;
+&lt;&lt;if $state lte 1&gt;&gt;&lt;&lt;link &quot;Rob&quot; &quot;Rob&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;else&gt;&gt;(Max: Broken) Rob&lt;&lt;/if&gt;&gt;
+
+[[Go Back|Corktown Hub]] </tw-passagedata><tw-passagedata pid="40" name="Steal" tags="" position="1114,443" size="100,100">You make your way to Upper Town and look for marks.
+
+[[Continue|Corktown Hub]] 
+
+&lt;&lt;set $daytime to false&gt;&gt;</tw-passagedata><tw-passagedata pid="41" name="Rob" tags="" position="1106,573" size="100,100">&lt;&lt;if $sr is gte 3&gt;&gt;
+
+[[Continue|Corktown Hub]] 
+
+&lt;&lt;set $daytime to false&gt;&gt;</tw-passagedata><tw-passagedata pid="42" name="Mooch" tags="" position="1226,333" size="100,100">&lt;&lt;nobr&gt;&gt;
+&lt;&lt;switch $sr&gt;&gt; 
+&lt;&lt;case 4&gt;&gt; 
+You ask some friends for help supporting you and your family, and they happily give you some money to see you through these tough times. Be warned, the wellsprings of generosity are not infinite.
+&lt;&lt;set $wealth += 10&gt;&gt; &lt;&lt;set $social -= 6&gt;&gt;
+&lt;&lt;case 3&gt;&gt; 
+A few members of the community pitch in to help you get through these tough times, but they&#39;re not exactly rich, nor are they overeager to share what little wealth they have.
+&lt;&lt;set $wealth += 6&gt;&gt; &lt;&lt;set $social -= 6&gt;&gt;
+&lt;&lt;case 2&gt;&gt; 
+You manage to convince one or two people to spare you some money. Judging from their mutterings when they think you&#39;re out of earshot, it seems you&#39;re becoming less and less welcome within your community.
+&lt;&lt;set $wealth += 3&gt;&gt; &lt;&lt;set $social -= 6&gt;&gt;
+&lt;&lt;case 1&gt;&gt; 
+Try as you might to eke out some money from your so-called fellows, all you get are cold shoulders and harsh glares. You&#39;re on your own.
+&lt;&lt;set $social -= 4&gt;&gt;
+&lt;&lt;/switch&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;
+
+[[Continue|Corktown Hub]] 
+
+&lt;&lt;set $daytime to false&gt;&gt;</tw-passagedata></tw-storydata>
 	<script id="script-sugarcube" type="text/javascript">
 	/*! SugarCube JS */
 	if(document.documentElement.getAttribute("data-init")==="loading"){!function(window,document,jQuery,undefined){"use strict";function _classCallCheck(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function _toConsumableArray(e){if(Array.isArray(e)){for(var t=0,r=Array(e.length);t<e.length;t++)r[t]=e[t];return r}return Array.from(e)}var _createClass=function(){function e(e,t){for(var r=0;r<t.length;r++){var n=t[r];n.enumerable=n.enumerable||!1,n.configurable=!0,"value"in n&&(n.writable=!0),Object.defineProperty(e,n.key,n)}}return function(t,r,n){return r&&e(t.prototype,r),n&&e(t,n),t}}(),_slicedToArray=function(){function e(e,t){var r=[],n=!0,a=!1,i=undefined;try{for(var o,s=e[Symbol.iterator]();!(n=(o=s.next()).done)&&(r.push(o.value),!t||r.length!==t);n=!0);}catch(e){a=!0,i=e}finally{try{!n&&s.return&&s.return()}finally{if(a)throw i}}return r}return function(t,r){if(Array.isArray(t))return t;if(Symbol.iterator in Object(t))return e(t,r);throw new TypeError("Invalid attempt to destructure non-iterable instance")}}(),_typeof="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e},errorPrologRegExp=/^(?:(?:uncaught\s+(?:exception:\s+)?)?\w*(?:error|exception|_err):\s+)+/i,Alert=function(){function e(e,t,r,n){var a="fatal"===e,i="Apologies! "+(a?"A fatal":"An")+" error has occurred.";i+=a?" Aborting.":" You may be able to continue, but some parts may not work properly.",null==t&&null==r||(i+="\n\nError",null!=t&&(i+=" ["+t+"]"),i+=null!=r?": "+r.replace(errorPrologRegExp,"")+".":": unknown error."),"object"===(void 0===n?"undefined":_typeof(n))&&n.stack&&(i+="\n\nStack Trace:\n"+n.stack),window.alert(i)}function t(t,r,n){e(null,t,r,n)}function r(t,r,n){e("fatal",t,r,n)}return function(e){window.onerror=function(n,a,i,o,s){"complete"===document.readyState?t(null,n,s):(r(null,n,s),window.onerror=e,"function"==typeof window.onerror&&window.onerror.apply(this,arguments))}}(window.onerror),Object.freeze(Object.defineProperties({},{error:{value:t},fatal:{value:r}}))}(),Patterns=function(){var e=function(){var e=new Map([[" ","\\u0020"],["\f","\\f"],["\n","\\n"],["\r","\\r"],["\t","\\t"],["\v","\\v"],[" ","\\u00a0"],[" ","\\u1680"],["᠎","\\u180e"],[" ","\\u2000"],[" ","\\u2001"],[" ","\\u2002"],[" ","\\u2003"],[" ","\\u2004"],[" ","\\u2005"],[" ","\\u2006"],[" ","\\u2007"],[" ","\\u2008"],[" ","\\u2009"],[" ","\\u200a"],["\u2028","\\u2028"],["\u2029","\\u2029"],[" ","\\u202f"],[" ","\\u205f"],["　","\\u3000"],["\ufeff","\\ufeff"]]),t=/^\s$/,r="";return e.forEach(function(e,n){t.test(n)||(r+=e)}),r?"[\\s"+r+"]":"\\s"}(),t="\\s"===e?"\\S":e.replace(/^\[/,"[^"),r="[0-9A-Z_a-z\\-\\u00c0-\\u00d6\\u00d8-\\u00f6\\u00f8-\\u00ff\\u0150\\u0170\\u0151\\u0171]",n=r.replace("\\-",""),a=function(){return"("+r+"+)\\(([^\\)\\|\\n]+)\\):|("+r+"+):([^;\\|\\n]+);|((?:\\."+r+"+)+);|((?:#"+r+"+)+);"}();return Object.freeze({space:e,spaceNoTerminator:"[\\u0020\\f\\t\\v\\u00a0\\u1680\\u180e\\u2000-\\u200a\\u202f\\u205f\\u3000\\ufeff]",lineTerminator:"[\\n\\r\\u2028\\u2029]",notSpace:t,anyChar:"(?:.|[\\n\\r\\u2028\\u2029])",anyLetter:r,anyLetterStrict:n,identifierFirstChar:"[$A-Z_a-z]",identifierNextChar:"[$0-9A-Z_a-z]",identifier:"[$A-Z_a-z][$0-9A-Z_a-z]*",variableSigil:"[$_]",variable:"[$_][$A-Z_a-z][$0-9A-Z_a-z]*",macroName:"[A-Za-z][\\w-]*|[=-]",templateName:"[A-Za-z][\\w-]*",cssImage:"\\[[<>]?[Ii][Mm][Gg]\\[(?:\\s|\\S)*?\\]\\]+",inlineCss:a,url:"(?:file|https?|mailto|ftp|javascript|irc|news|data):[^\\s'\"]+"})}();!function(){!function(e){if(e&&e.prototype&&null==e.prototype.firstElementChild){var t=Node.ELEMENT_NODE;Object.defineProperty(e.prototype,"firstElementChild",{get:function(){for(var e=this.childNodes,r=0;r<e.length;++r){var n=e[r];if(n.nodeType===t)return n}return null}})}}(window.Node||window.Element)}(),function(){function e(e,t){var r=Number.parseInt(e,10)||0;if(r<1)return"";var n=void 0===t?"":String(t);for(""===n&&(n=" ");n.length<r;){var a=n.length,i=r-a;n+=a>i?n.slice(0,i):n}return n.length>r&&(n=n.slice(0,r)),n}var t=function(){function e(e,n){var a=String(e);if(!a)return a;switch(n){case"start":return t.test(a)?a.replace(t,""):a;case"end":return r.test(a)?a.replace(r,""):a;default:throw new Error('_trimString called with incorrect where parameter value: "'+n+'"')}}var t=new RegExp("^"+Patterns.space+Patterns.space+"*"),r=new RegExp(""+Patterns.space+Patterns.space+"*$");return e}();Array.prototype.flat||Object.defineProperty(Array.prototype,"flat",{configurable:!0,writable:!0,value:function(){function e(){if(null==this)throw new TypeError("Array.prototype.flat called on null or undefined");var t=0===arguments.length?1:Number(arguments[0])||0;return t<1?Array.prototype.slice.call(this):Array.prototype.reduce.call(this,function(r,n){return n instanceof Array?r.push.apply(r,_toConsumableArray(e.call(n,t-1))):r.push(n),r},[])}return e}()}),Array.prototype.flatMap||Object.defineProperty(Array.prototype,"flatMap",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.flatMap called on null or undefined");return Array.prototype.map.apply(this,arguments).flat()}}),Array.prototype.includes||Object.defineProperty(Array.prototype,"includes",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.includes called on null or undefined");if(0===arguments.length)return!1;var e=this.length>>>0;if(0===e)return!1;var t=arguments[0],r=Number(arguments[1])||0;for(r<0&&(r=Math.max(0,e+r));r<e;++r){var n=this[r];if(n===t||n!==n&&t!==t)return!0}return!1}}),Object.entries||Object.defineProperty(Object,"entries",{configurable:!0,writable:!0,value:function(e){if("object"!==(void 0===e?"undefined":_typeof(e))||null===e)throw new TypeError("Object.entries object parameter must be an object");return Object.keys(e).map(function(t){return[t,e[t]]})}}),Object.fromEntries||Object.defineProperty(Object,"fromEntries",{configurable:!0,writable:!0,value:function(e){return Array.from(e).reduce(function(e,t){if(Object(t)!==t)throw new TypeError("Object.fromEntries iterable parameter must yield objects");return t[0]in e?Object.defineProperty(e,t[0],{configurable:!0,enumerable:!0,writable:!0,value:t[1]}):e[t[0]]=t[1],e},{})}}),Object.getOwnPropertyDescriptors||Object.defineProperty(Object,"getOwnPropertyDescriptors",{configurable:!0,writable:!0,value:function(e){if(null==e)throw new TypeError("Object.getOwnPropertyDescriptors object parameter is null or undefined");var t=Object(e);return Reflect.ownKeys(t).reduce(function(e,r){var n=Object.getOwnPropertyDescriptor(t,r);return void 0!==n&&(r in e?Object.defineProperty(e,r,{configurable:!0,enumerable:!0,writable:!0,value:n}):e[r]=n),e},{})}}),Object.values||Object.defineProperty(Object,"values",{configurable:!0,writable:!0,value:function(e){if("object"!==(void 0===e?"undefined":_typeof(e))||null===e)throw new TypeError("Object.values object parameter must be an object");return Object.keys(e).map(function(t){return e[t]})}}),String.prototype.padStart||Object.defineProperty(String.prototype,"padStart",{configurable:!0,writable:!0,value:function(t,r){if(null==this)throw new TypeError("String.prototype.padStart called on null or undefined");var n=String(this),a=n.length,i=Number.parseInt(t,10);return i<=a?n:e(i-a,r)+n}}),String.prototype.padEnd||Object.defineProperty(String.prototype,"padEnd",{configurable:!0,writable:!0,value:function(t,r){if(null==this)throw new TypeError("String.prototype.padEnd called on null or undefined");var n=String(this),a=n.length,i=Number.parseInt(t,10);return i<=a?n:n+e(i-a,r)}}),String.prototype.trimStart||Object.defineProperty(String.prototype,"trimStart",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.trimStart called on null or undefined");return t(this,"start")}}),String.prototype.trimLeft||Object.defineProperty(String.prototype,"trimLeft",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.trimLeft called on null or undefined");return t(this,"start")}}),String.prototype.trimEnd||Object.defineProperty(String.prototype,"trimEnd",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.trimEnd called on null or undefined");return t(this,"end")}}),String.prototype.trimRight||Object.defineProperty(String.prototype,"trimRight",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.trimRight called on null or undefined");return t(this,"end")}})}(),function(){function _random(){var e=void 0,t=void 0;switch(arguments.length){case 0:throw new Error("_random called with insufficient parameters");case 1:e=0,t=arguments[0];break;default:e=arguments[0],t=arguments[1]}if(e>t){var r=[t,e];e=r[0],t=r[1]}return Math.floor(_nativeMathRandom()*(t-e+1))+e}function _randomIndex(e,t){var r=void 0,n=void 0;switch(t.length){case 1:r=0,n=e-1;break;case 2:r=0,n=Math.trunc(t[1]);break;default:r=Math.trunc(t[1]),n=Math.trunc(t[2])}return Number.isNaN(r)?r=0:!Number.isFinite(r)||r>=e?r=e-1:r<0&&(r=e+r)<0&&(r=0),Number.isNaN(n)?n=0:!Number.isFinite(n)||n>=e?n=e-1:n<0&&(n=e+n)<0&&(n=e-1),_random(r,n)}function _getCodePointStartAndEnd(e,t){var r=e.charCodeAt(t);if(Number.isNaN(r))return{char:"",start:-1,end:-1};if(r<55296||r>57343)return{char:e.charAt(t),start:t,end:t};if(r>=55296&&r<=56319){var n=t+1;if(n>=e.length)throw new Error("high surrogate without trailing low surrogate");var a=e.charCodeAt(n);if(a<56320||a>57343)throw new Error("high surrogate without trailing low surrogate");return{char:e.charAt(t)+e.charAt(n),start:t,end:n}}if(0===t)throw new Error("low surrogate without leading high surrogate");var i=t-1,o=e.charCodeAt(i);if(o<55296||o>56319)throw new Error("low surrogate without leading high surrogate");return{char:e.charAt(i)+e.charAt(t),start:i,end:t}}var _nativeMathRandom=Math.random;Object.defineProperty(Array,"random",{configurable:!0,writable:!0,value:function(e){if("object"!==(void 0===e?"undefined":_typeof(e))||null===e||!Object.prototype.hasOwnProperty.call(e,"length"))throw new TypeError("Array.random array parameter must be an array or array-lke object");var t=e.length>>>0;if(0!==t){return e[0===arguments.length?_random(0,t-1):_randomIndex(t,Array.prototype.slice.call(arguments,1))]}}}),Object.defineProperty(Array.prototype,"concatUnique",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.concatUnique called on null or undefined");var e=Array.from(this);if(0===arguments.length)return e;var t=Array.prototype.reduce.call(arguments,function(e,t){return e.concat(t)},[]),r=t.length;if(0===r)return e;for(var n=Array.prototype.indexOf,a=Array.prototype.push,i=0;i<r;++i){var o=t[i];-1===n.call(e,o)&&a.call(e,o)}return e}}),Object.defineProperty(Array.prototype,"count",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.count called on null or undefined");for(var e=Array.prototype.indexOf,t=arguments[0],r=Number(arguments[1])||0,n=0;-1!==(r=e.call(this,t,r));)++n,++r;return n}}),Object.defineProperty(Array.prototype,"delete",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.delete called on null or undefined");if(0===arguments.length)return[];var e=this.length>>>0;if(0===e)return[];for(var t=Array.prototype.concat.apply([],arguments),r=t.length,n=[],a=0;a<e;++a)for(var i=this[a],o=0;o<r;++o){var s=t[o];if(i===s||i!==i&&s!==s){n.push(a);break}}for(var u=[],l=0,c=n.length;l<c;++l)u[l]=this[n[l]];for(var d=Array.prototype.splice,f=n.length-1;f>=0;--f)d.call(this,n[f],1);return u}}),Object.defineProperty(Array.prototype,"deleteAt",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.deleteAt called on null or undefined");if(0===arguments.length)return[];var e=this.length>>>0;if(0===e)return[];for(var t=Array.prototype.splice,r=[].concat(_toConsumableArray(new Set(Array.prototype.concat.apply([],arguments).map(function(t){return t<0?Math.max(0,e+t):t})).values())),n=[].concat(_toConsumableArray(r)).sort(function(e,t){return t-e}),a=[],i=0,o=r.length;i<o;++i)a[i]=this[r[i]];for(var s=0,u=n.length;s<u;++s)t.call(this,n[s],1);return a}}),Object.defineProperty(Array.prototype,"deleteWith",{configurable:!0,writable:!0,value:function(e,t){if(null==this)throw new TypeError("Array.prototype.deleteWith called on null or undefined");if("function"!=typeof e)throw new Error("Array.prototype.deleteWith predicate parameter must be a function");var r=this.length>>>0;if(0===r)return[];for(var n=Array.prototype.splice,a=[],i=[],o=0;o<r;++o)e.call(t,this[o],o,this)&&(i.push(this[o]),a.push(o));for(var s=a.length-1;s>=0;--s)n.call(this,a[s],1);return i}}),Object.defineProperty(Array.prototype,"first",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.first called on null or undefined");if(0!=this.length>>>0)return this[0]}}),Object.defineProperty(Array.prototype,"includesAll",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.includesAll called on null or undefined");if(1===arguments.length)return Array.isArray(arguments[0])?Array.prototype.includesAll.apply(this,arguments[0]):Array.prototype.includes.apply(this,arguments);for(var e=0,t=arguments.length;e<t;++e)if(!Array.prototype.some.call(this,function(e){return e===this.val||e!==e&&this.val!==this.val},{val:arguments[e]}))return!1;return!0}}),Object.defineProperty(Array.prototype,"includesAny",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.includesAny called on null or undefined");if(1===arguments.length)return Array.isArray(arguments[0])?Array.prototype.includesAny.apply(this,arguments[0]):Array.prototype.includes.apply(this,arguments);for(var e=0,t=arguments.length;e<t;++e)if(Array.prototype.some.call(this,function(e){return e===this.val||e!==e&&this.val!==this.val},{val:arguments[e]}))return!0;return!1}}),Object.defineProperty(Array.prototype,"last",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.last called on null or undefined");var e=this.length>>>0;if(0!==e)return this[e-1]}}),Object.defineProperty(Array.prototype,"pluck",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.pluck called on null or undefined");var e=this.length>>>0;if(0!==e){var t=0===arguments.length?_random(0,e-1):_randomIndex(e,[].concat(Array.prototype.slice.call(arguments)));return Array.prototype.splice.call(this,t,1)[0]}}}),Object.defineProperty(Array.prototype,"pluckMany",{configurable:!0,writable:!0,value:function(e){if(null==this)throw new TypeError("Array.prototype.pluckMany called on null or undefined");var t=this.length>>>0;if(0===t)return[];var r=Math.trunc(e);if(!Number.isInteger(r))throw new Error("Array.prototype.pluckMany want parameter must be an integer");if(r<1)return[];r>t&&(r=t);var n=Array.prototype.splice,a=[],i=t-1;do{a.push(n.call(this,_random(0,i--),1)[0])}while(a.length<r);return a}}),Object.defineProperty(Array.prototype,"pushUnique",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.pushUnique called on null or undefined");var e=arguments.length;if(0===e)return this.length>>>0;for(var t=Array.prototype.indexOf,r=Array.prototype.push,n=0;n<e;++n){var a=arguments[n];-1===t.call(this,a)&&r.call(this,a)}return this.length>>>0}}),Object.defineProperty(Array.prototype,"random",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.random called on null or undefined");var e=this.length>>>0;if(0!==e){return this[0===arguments.length?_random(0,e-1):_randomIndex(e,[].concat(Array.prototype.slice.call(arguments)))]}}}),Object.defineProperty(Array.prototype,"randomMany",{configurable:!0,writable:!0,value:function(e){if(null==this)throw new TypeError("Array.prototype.randomMany called on null or undefined");var t=this.length>>>0;if(0===t)return[];var r=Math.trunc(e);if(!Number.isInteger(r))throw new Error("Array.prototype.randomMany want parameter must be an integer");if(r<1)return[];r>t&&(r=t);var n=new Map,a=[],i=t-1;do{var o=void 0;do{o=_random(0,i)}while(n.has(o));n.set(o,!0),a.push(this[o])}while(a.length<r);return a}}),Object.defineProperty(Array.prototype,"shuffle",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.shuffle called on null or undefined");var e=this.length>>>0;if(0===e)return this;for(var t=e-1;t>0;--t){var r=Math.floor(_nativeMathRandom()*(t+1));if(t!==r){var n=this[t];this[t]=this[r],this[r]=n}}return this}}),Object.defineProperty(Array.prototype,"unshiftUnique",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.unshiftUnique called on null or undefined");var e=arguments.length;if(0===e)return this.length>>>0;for(var t=Array.prototype.indexOf,r=Array.prototype.unshift,n=0;n<e;++n){var a=arguments[n];-1===t.call(this,a)&&r.call(this,a)}return this.length>>>0}}),Object.defineProperty(Function.prototype,"partial",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Function.prototype.partial called on null or undefined");var e=Array.prototype.slice,t=this,r=e.call(arguments,0);return function(){for(var n=[],a=0,i=0;i<r.length;++i)n.push(r[i]===undefined?arguments[a++]:r[i]);return t.apply(this,n.concat(e.call(arguments,a)))}}}),Object.defineProperty(Math,"clamp",{configurable:!0,writable:!0,value:function(e,t,r){var n=Number(e);return Number.isNaN(n)?NaN:n.clamp(t,r)}}),Object.defineProperty(Math,"easeInOut",{configurable:!0,writable:!0,value:function(e){return 1-(Math.cos(Number(e)*Math.PI)+1)/2}}),Object.defineProperty(Number.prototype,"clamp",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Number.prototype.clamp called on null or undefined");if(2!==arguments.length)throw new Error("Number.prototype.clamp called with an incorrect number of parameters");var e=Number(arguments[0]),t=Number(arguments[1]);if(e>t){var r=[t,e];e=r[0],t=r[1]}return Math.min(Math.max(this,e),t)}}),RegExp.escape||function(){var e=/[\\^$*+?.()|[\]{}]/g,t=new RegExp(e.source);Object.defineProperty(RegExp,"escape",{configurable:!0,writable:!0,value:function(r){var n=String(r);return n&&t.test(n)?n.replace(e,"\\$&"):n}})}(),function(){var e=/{(\d+)(?:,([+-]?\d+))?}/g,t=new RegExp(e.source);Object.defineProperty(String,"format",{configurable:!0,writable:!0,value:function(r){function n(e,t,r){if(!t)return e;var n=Math.abs(t)-e.length;if(n<1)return e;var a=String(r).repeat(n);return t<0?e+a:a+e}if(arguments.length<2)return 0===arguments.length?"":r;var a=2===arguments.length&&Array.isArray(arguments[1])?[].concat(_toConsumableArray(arguments[1])):Array.prototype.slice.call(arguments,1);return 0===a.length?r:t.test(r)?(e.lastIndex=0,r.replace(e,function(e,t,r){var i=a[t];if(null==i)return"";for(;"function"==typeof i;)i=i();switch(void 0===i?"undefined":_typeof(i)){case"string":break;case"object":i=JSON.stringify(i);break;default:i=String(i)}return n(i,r?Number.parseInt(r,10):0," ")})):r}})}(),Object.defineProperty(String.prototype,"contains",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.contains called on null or undefined");return-1!==String.prototype.indexOf.apply(this,arguments)}}),Object.defineProperty(String.prototype,"count",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.count called on null or undefined");var e=String(arguments[0]||"");if(""===e)return 0;for(var t=String.prototype.indexOf,r=e.length,n=Number(arguments[1])||0,a=0;-1!==(n=t.call(this,e,n));)++a,n+=r;return a}}),Object.defineProperty(String.prototype,"first",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.first called on null or undefined");return _getCodePointStartAndEnd(String(this),0).char}}),Object.defineProperty(String.prototype,"last",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.last called on null or undefined");var e=String(this);return _getCodePointStartAndEnd(e,e.length-1).char}}),Object.defineProperty(String.prototype,"splice",{configurable:!0,writable:!0,value:function(e,t,r){if(null==this)throw new TypeError("String.prototype.splice called on null or undefined");var n=this.length>>>0;if(0===n)return"";var a=Number(e);Number.isSafeInteger(a)?a<0&&(a+=n)<0&&(a=0):a=0,a>n&&(a=n);var i=Number(t);(!Number.isSafeInteger(i)||i<0)&&(i=0);var o=this.slice(0,a);return void 0!==r&&(o+=r),a+i<n&&(o+=this.slice(a+i)),o}}),Object.defineProperty(String.prototype,"splitOrEmpty",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.splitOrEmpty called on null or undefined");return""===String(this)?[]:String.prototype.split.apply(this,arguments)}}),Object.defineProperty(String.prototype,"toLocaleUpperFirst",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.toLocaleUpperFirst called on null or undefined");var e=String(this),t=_getCodePointStartAndEnd(e,0),r=t.char,n=t.end;return-1===n?"":r.toLocaleUpperCase()+e.slice(n+1)}}),Object.defineProperty(String.prototype,"toUpperFirst",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.toUpperFirst called on null or undefined");var e=String(this),t=_getCodePointStartAndEnd(e,0),r=t.char,n=t.end;return-1===n?"":r.toUpperCase()+e.slice(n+1)}}),Object.defineProperty(Date.prototype,"toJSON",{configurable:!0,writable:!0,value:function(){return["(revive:date)",this.toISOString()]}}),Object.defineProperty(Function.prototype,"toJSON",{configurable:!0,writable:!0,value:function(){return["(revive:eval)","("+this.toString()+")"]}}),Object.defineProperty(Map.prototype,"toJSON",{configurable:!0,writable:!0,value:function(){return["(revive:map)",[].concat(_toConsumableArray(this))]}}),Object.defineProperty(RegExp.prototype,"toJSON",{configurable:!0,writable:!0,value:function(){return["(revive:eval)",this.toString()]}}),Object.defineProperty(Set.prototype,"toJSON",{configurable:!0,writable:!0,value:function(){return["(revive:set)",[].concat(_toConsumableArray(this))]}}),Object.defineProperty(JSON,"reviveWrapper",{configurable:!0,writable:!0,value:function(e,t){if("string"!=typeof e)throw new TypeError("JSON.reviveWrapper code parameter must be a string");return["(revive:eval)",[e,t]]}}),Object.defineProperty(JSON,"_real_parse",{value:JSON.parse}),Object.defineProperty(JSON,"parse",{configurable:!0,writable:!0,value:function value(text,reviver){return JSON._real_parse(text,function(key,val){var value=val;if(Array.isArray(value)&&2===value.length)switch(value[0]){case"(revive:set)":value=new Set(value[1]);break;case"(revive:map)":value=new Map(value[1]);break;case"(revive:date)":value=new Date(value[1]);break;case"(revive:eval)":try{if(Array.isArray(value[1])){var $ReviveData$=value[1][1];value=eval(value[1][0])}else value=eval(value[1])}catch(e){}}else if("string"==typeof value&&"@@revive@@"===value.slice(0,10))try{value=eval(value.slice(10))}catch(e){}if("function"==typeof reviver)try{value=reviver(key,value)}catch(e){}return value})}}),Object.defineProperty(Array.prototype,"contains",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.contains called on null or undefined");return Array.prototype.includes.apply(this,arguments)}}),Object.defineProperty(Array.prototype,"containsAll",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.containsAll called on null or undefined");return Array.prototype.includesAll.apply(this,arguments)}}),Object.defineProperty(Array.prototype,"containsAny",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.containsAny called on null or undefined");return Array.prototype.includesAny.apply(this,arguments)}}),Object.defineProperty(Array.prototype,"flatten",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.flatten called on null or undefined");return Array.prototype.flat.call(this,1/0)}}),Object.defineProperty(String.prototype,"readBracketedList",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.readBracketedList called on null or undefined");for(var e=new RegExp("(?:\\[\\[((?:\\s|\\S)*?)\\]\\])|([^\"'\\s]\\S*)","gm"),t=[],r=void 0;null!==(r=e.exec(this));)r[1]?t.push(r[1]):r[2]&&t.push(r[2]);return t}})}();var Browser=function(){var e=navigator.userAgent.toLowerCase(),t=e.includes("windows phone"),r=Object.freeze({Android:!t&&e.includes("android"),BlackBerry:/blackberry|bb10/.test(e),iOS:!t&&/ip(?:hone|ad|od)/.test(e),Opera:!t&&("object"===_typeof(window.operamini)||e.includes("opera mini")),Windows:t||/iemobile|wpdesktop/.test(e),any:function(){return r.Android||r.BlackBerry||r.iOS||r.Opera||r.Windows}}),n=!r.Windows&&!/khtml|trident|edge/.test(e)&&e.includes("gecko"),a=!e.includes("opera")&&/msie|trident/.test(e),i=a?function(){var t=/(?:msie\s+|rv:)(\d+\.\d)/.exec(e);return t?Number(t[1]):0}():null,o=e.includes("opera")||e.includes(" opr/"),s=o?function(){var t=new RegExp((/khtml|chrome/.test(e)?"opr":"version")+"\\/(\\d+\\.\\d+)"),r=t.exec(e);return r?Number(r[1]):0}():null,u=e.includes("vivaldi");return Object.freeze({userAgent:e,isMobile:r,isGecko:n,isIE:a,ieVersion:i,isOpera:o,operaVersion:s,isVivaldi:u})}(),Has=function(){var e=function(){try{return"function"==typeof document.createElement("audio").canPlayType}catch(e){}return!1}(),t=e&&function(){try{var e=document.createElement("audio").play();return e.catch(function(){}),e instanceof Promise}catch(e){}return!1}(),r=function(){try{return"Blob"in window&&"File"in window&&"FileList"in window&&"FileReader"in window&&!Browser.isMobile.any()&&(!Browser.isOpera||Browser.operaVersion>=15)}catch(e){}return!1}(),n=function(){try{return"geolocation"in navigator&&"function"==typeof navigator.geolocation.getCurrentPosition&&"function"==typeof navigator.geolocation.watchPosition}catch(e){}return!1}(),a=function(){try{return"MutationObserver"in window&&"function"==typeof window.MutationObserver}catch(e){}return!1}(),i=function(){try{return"performance"in window&&"function"==typeof window.performance.now}catch(e){}return!1}(),o=function(){try{return"ontouchstart"in window||!!window.DocumentTouch&&document instanceof window.DocumentTouch||!!navigator.maxTouchPoints||!!navigator.msMaxTouchPoints}catch(e){}return!1}(),s=function(){try{for(var e=new Map([["transition","transitionend"],["MSTransition","msTransitionEnd"],["WebkitTransition","webkitTransitionEnd"],["MozTransition","transitionend"]]),t=[].concat(_toConsumableArray(e.keys())),r=document.createElement("div"),n=0;n<t.length;++n)if(r.style[t[n]]!==undefined)return e.get(t[n])}catch(e){}return!1}();return Object.freeze({audio:e,audioPromise:t,fileAPI:r,geolocation:n,mutationObserver:a,performance:i,touch:o,transitionEndEvent:s})}(),Visibility=function(){function e(){return Boolean(r&&document[r.hiddenProperty])}function t(){return r&&document[r.stateProperty]||"visible"}var r=function(){try{return Object.freeze([{hiddenProperty:"hidden",stateProperty:"visibilityState",changeEvent:"visibilitychange"},{hiddenProperty:"webkitHidden",stateProperty:"webkitVisibilityState",changeEvent:"webkitvisibilitychange"},{hiddenProperty:"mozHidden",stateProperty:"mozVisibilityState",changeEvent:"mozvisibilitychange"},{hiddenProperty:"msHidden",stateProperty:"msVisibilityState",changeEvent:"msvisibilitychange"}].find(function(e){return e.hiddenProperty in document}))}catch(e){}return null}();return Object.freeze(Object.defineProperties({},{isHidden:{value:e},state:{value:t},hiddenProperty:{value:r.hiddenProperty},stateProperty:{value:r.stateProperty},changeEvent:{value:r.changeEvent}}))}(),_ref3=function(){function e(t){if("object"!==(void 0===t?"undefined":_typeof(t))||null===t)return t;if(t instanceof String)return String(t);if(t instanceof Number)return Number(t);if(t instanceof Boolean)return Boolean(t);if("function"==typeof t.clone)return t.clone(!0);if(t.nodeType&&"function"==typeof t.cloneNode)return t.cloneNode(!0);var r=void 0;return t instanceof Array?r=new Array(t.length):t instanceof Date?r=new Date(t.getTime()):t instanceof Map?(r=new Map,t.forEach(function(t,n){return r.set(n,e(t))})):t instanceof RegExp?r=new RegExp(t):t instanceof Set?(r=new Set,t.forEach(function(t){return r.add(e(t))})):r=Object.create(Object.getPrototypeOf(t)),Object.keys(t).forEach(function(n){return r[n]=e(t[n])}),r}function t(e){for(var t=document.createDocumentFragment(),r=document.createElement("p"),n=void 0;null!==(n=e.firstChild);){if(n.nodeType===Node.ELEMENT_NODE){switch(n.nodeName.toUpperCase()){case"BR":if(null!==n.nextSibling&&n.nextSibling.nodeType===Node.ELEMENT_NODE&&"BR"===n.nextSibling.nodeName.toUpperCase()){e.removeChild(n.nextSibling),e.removeChild(n),t.appendChild(r),r=document.createElement("p");continue}if(!r.hasChildNodes()){e.removeChild(n);continue}break;case"ADDRESS":case"ARTICLE":case"ASIDE":case"BLOCKQUOTE":case"CENTER":case"DIV":case"DL":case"FIGURE":case"FOOTER":case"FORM":case"H1":case"H2":case"H3":case"H4":case"H5":case"H6":case"HEADER":case"HR":case"MAIN":case"NAV":case"OL":case"P":case"PRE":case"SECTION":case"TABLE":case"UL":r.hasChildNodes()&&(t.appendChild(r),r=document.createElement("p")),t.appendChild(n);continue}}r.appendChild(n)}r.hasChildNodes()&&t.appendChild(r),e.appendChild(t)}function r(){try{return document.activeElement||null}catch(e){return null}}function n(e,t,r){var n="object"===(void 0===e?"undefined":_typeof(e))?e:document.getElementById(e);if(null==n)return null;var a=Array.isArray(t)?t:[t];jQuery(n).empty();for(var i=0,o=a.length;i<o;++i)if(Story.has(a[i]))return new Wikifier(n,Story.get(a[i]).processText().trim()),n;if(null!=r){var s=String(r).trim();""!==s&&new Wikifier(n,s)}return n}function a(e,t,r){var n=jQuery(document.createElement("div")),a=jQuery(document.createElement("button")),i=jQuery(document.createElement("pre")),o=L10n.get("errorTitle")+": "+(t||"unknown error");return a.addClass("error-toggle").ariaClick({label:L10n.get("errorToggle")},function(){a.hasClass("enabled")?(a.removeClass("enabled"),i.attr({"aria-hidden":!0,hidden:"hidden"})):(a.addClass("enabled"),i.removeAttr("aria-hidden hidden"))}).appendTo(n),jQuery(document.createElement("span")).addClass("error").text(o).appendTo(n),jQuery(document.createElement("code")).text(r).appendTo(i),i.addClass("error-source").attr({"aria-hidden":!0,hidden:"hidden"}).appendTo(n),n.addClass("error-view").appendTo(e),console.warn(o+"\n\t"+r.replace(/\n/g,"\n\t")),!1}function i(e,t){var r=i;switch(void 0===e?"undefined":_typeof(e)){case"number":if(Number.isNaN(e))return t;break;case"object":if(null===e)return t;if(Array.isArray(e))return e.map(function(e){return r(e,t)}).join(", ");if(e instanceof Set)return[].concat(_toConsumableArray(e)).map(function(e){return r(e,t)}).join(", ");if(e instanceof Map){return"{ "+[].concat(_toConsumableArray(e)).map(function(e){var n=_slicedToArray(e,2),a=n[0],i=n[1];return r(a,t)+" → "+r(i,t)}).join(", ")+" }"}return e instanceof Date?e.toLocaleString():"function"==typeof e.toString?e.toString():Object.prototype.toString.call(e);case"function":case"undefined":return t}return String(e)}return Object.freeze(Object.defineProperties({},{clone:{value:e},convertBreaks:{value:t},safeActiveElement:{value:r},setPageElement:{value:n},throwError:{value:a},toStringOrDefault:{value:i}}))
