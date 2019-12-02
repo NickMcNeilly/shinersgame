@@ -1,7 +1,7 @@
 # they're counting on you.
 by Nick McNeilly
 
-*[Begin](https://nickmcneilly.github.io/shinersgame/shiners.html)*
+**[Begin](https://nickmcneilly.github.io/shinersgame/shiners.html)**
 
 Last updated December 2, 2019
 
