@@ -1,9 +1,11 @@
-# Shiners Game
+# they're counting on you.
 by Nick McNeilly
 
 [Begin](https://nickmcneilly.github.io/shinersgame/shiners.html)
+
 Last updated December 2, 2019
 
+Welcome. This is a Twine game I constructed over the course of my [Guerrilla Public History](https://github.com/shawngraham/guerrilla-dh/wiki) class at Carleton University. It's based on the historical city of Bytown in the 1830s, now more commonly known as Ottawa, capital of Canada. The game explores the lives of the Irish labourers that worked on the Rideau canal, and about the group of early gangsters that banded together under the banner of the Shiners.
 
 [Paradata]
 
