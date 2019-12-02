@@ -9,7 +9,7 @@ Welcome. This is a Twine game I constructed over the course of my [Guerrilla Pub
 
 [Paradata]
 
-[Devlog 9]
+[Devlog 9](https://nickmc.netlify.com/post/03-12-2019-devlog-nine/)
 
 [Devlog 8](https://nickmc.netlify.com/post/02-12-2019-devlog-eight/)
 
