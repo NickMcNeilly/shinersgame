@@ -134,7 +134,9 @@ a.phys:hover span {
 
 
 
+
 </style><script role="script" id="twine-user-script" type="text/twine-javascript">Config.history.controls = false;
+
 
 
 
@@ -157,7 +159,7 @@ Your Daughter, age 1: &lt;&lt;textbox &quot;$daughter&quot; &quot;Caitlín&quot;
 
 When you arrived in what was advertized as the &#39;New World&#39;, you made your way further inland until coming to Bytown, a lumber town that lured you in with the promise of steady work. You&#39;ve settled in a shanty town called Corktown, built into the dirt and earth alongside the unfinished Rideau Canal. You&#39;ve been hired to help finish it. Most of your countrymen are single, perhaps with a wife - and it becomes clear that it&#39;s going to become a challenge to feed your growing family. But you&#39;ve spent what fortune you had coming here - there&#39;s no turning back now.
 
-[[Begin|Corktown Hub][$gameStart to true]]</tw-passagedata><tw-passagedata pid="2" name="Corktown Hub" tags="" position="566,305" size="100,100">&lt;&lt;nobr&gt;&gt; The year is 
+[[Begin|Corktown Hub][$gameStart to true]]</tw-passagedata><tw-passagedata pid="2" name="Corktown Hub" tags="" position="566,301.6666666666667" size="100,100">&lt;&lt;nobr&gt;&gt; The year is 
 &lt;&lt;if $act is 1&gt;&gt;
 1830,
 &lt;&lt;elseif $act is 2&gt;&gt;
@@ -206,7 +208,8 @@ You are on strike.
 &lt;&lt;if $week is 28 and $eventProc is false&gt;&gt;&lt;&lt;goto Choice9&gt;&gt;&lt;&lt;/if&gt;&gt;
 &lt;&lt;if $week is 29 and $eventProc is false&gt;&gt;&lt;&lt;goto Choice10&gt;&gt;&lt;&lt;/if&gt;&gt;
 &lt;&lt;if $week is 26 and $daytime is false and $eventProc is false&gt;&gt;&lt;&lt;goto Choice8&gt;&gt;&lt;&lt;/if&gt;&gt;
-&lt;&lt;if $week is 31 and $daytime is false and $eventProc is false&gt;&gt;&lt;&lt;goto Choice11&gt;&gt;&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="3" name="Stats" tags="" position="99,119" size="100,100">&lt;&lt;nobr&gt;&gt; Wealth:
+&lt;&lt;if $week is 31 and $daytime is false and $eventProc is false&gt;&gt;&lt;&lt;goto Choice11&gt;&gt;&lt;&lt;/if&gt;&gt;
+/*&lt;&lt;if $debug&gt;&gt; &lt;&lt;set $wealth += 50&gt;&gt; &lt;&lt;set $weekFoodBuy to true&gt;&gt;&lt;&lt;set $foodQuality to 4&gt;&gt;&lt;&lt;/if&gt;&gt;*/</tw-passagedata><tw-passagedata pid="3" name="Stats" tags="" position="99,119" size="100,100">&lt;&lt;nobr&gt;&gt; Wealth:
 &lt;&lt;if $wealth &gt;= 75&gt;&gt; &lt;&lt;set $wr to 4&gt;&gt;
 @@color:#15ff00;You&#39;re rather poor, but better off than your fellows.@@
 &lt;&lt;elseif $wealth &gt;= 50 and $wealth &lt; 75&gt;&gt; &lt;&lt;set $wr to 3&gt;&gt;
@@ -230,7 +233,7 @@ You are on strike.
 &lt;&lt;if $illness&gt;&gt; @@color:#ff0000;You have an illness.@@ &lt;&lt;else&gt;&gt; @@color:#15ff00;You are not sick.@@ &lt;&lt;/if&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
 &lt;&lt;nobr&gt;&gt;
-Compassion:
+Compassion: &lt;&lt;if $debug&gt;&gt;$compassion&lt;&lt;/if&gt;&gt;
 &lt;&lt;if $compassion &gt;= 75&gt;&gt; &lt;&lt;set $cr to 4&gt;&gt;
 @@color:#15ff00;You&#39;re always looking to help out where you can.@@
 &lt;&lt;elseif $compassion &gt;=50 and $compassion &lt; 75&gt;&gt; &lt;&lt;set $cr to 3&gt;&gt;
@@ -464,9 +467,7 @@ You leave with your wages.
 &lt;&lt;if $week is 2&gt;&gt;&lt;&lt;goto Choice1&gt;&gt;&lt;&lt;/if&gt;&gt;
 &lt;&lt;if $week is 4&gt;&gt;&lt;&lt;goto Choice2&gt;&gt;&lt;&lt;/if&gt;&gt;
 &lt;&lt;if $week is 6&gt;&gt;&lt;&lt;goto Choice3&gt;&gt;&lt;&lt;/if&gt;&gt;
-&lt;&lt;if $week is 7 or $week is 8 and $strike is false&gt;&gt;&lt;&lt;goto Choice3Option2&gt;&gt;&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="10" name="Physicality" tags="autosave" position="272,205" size="100,100">(Version 0.3)
-
-This is a fictional story, but it is based on the factual lives of Irish Immigrants in nineteenth-century Ottawa. You can click &#39;Sources&#39; on the menu to the left for further reading.
+&lt;&lt;if $week is 7 or $week is 8 and $strike is false&gt;&gt;&lt;&lt;goto Choice3Option2&gt;&gt;&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="10" name="Physicality" tags="autosave" position="272,205" size="100,100">This is a fictional story, but it is based on the factual lives of Irish Immigrants in nineteenth-century Ottawa. You can click &#39;Sources&#39; on the menu to the left for further reading.
 
 Some choices, shown in green, require a physicality test. To answer these riddles, you&#39;ll have to either physically travel to the locations hinted at, or you&#39;ll need to explore them online through pictures or tools like Streetview. These choices aren&#39;t necessary to complete the game, but they generally have less downsides than mundane choices. All answers are case sensitive.
 
@@ -744,24 +745,24 @@ $daughter has fallen ill.  &lt;&lt;set $famSick += 1&gt;&gt; &lt;&lt;set $dHealt
 &lt;&lt;set $eventProc to false&gt;&gt;
 &lt;&lt;else&gt;&gt;\
 
-[[You don&#39;t wake up.|Player Death]]&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="15" name="Store" tags="" position="126,553" size="100,100">You enter the local store, erected by your contractor to provide for the needs of the members of your community. The shopkeep gives you a welcoming smile.
+[[You don&#39;t wake up.|Player Death]]&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="15" name="Store" tags="" position="124.33333333333333,551.3333333333333" size="100,100">You enter the local store, erected by your contractor to provide for the needs of the members of your community. The shopkeep gives you a welcoming smile.
 \
 \
 &lt;&lt;if $weekFoodBuy is false&gt;&gt;
-&lt;&lt;if $wealth gte 15&gt;&gt;\
-&lt;&lt;link &quot;Buy a week&#39;s worth of plentiful, varied food. (4 Wealth each)&quot; &quot;Store&quot;&gt;&gt;\
-&lt;&lt;set $weekFoodBuy to true&gt;&gt;&lt;&lt;set $foodQuality to 4&gt;&gt;&lt;&lt;set $wealth -= (4 * (4 - $famDead))&gt;&gt;\
+&lt;&lt;if $wealth gte (3 * (4 - $famDead))&gt;&gt;\
+&lt;&lt;link &quot;Buy a week&#39;s worth of plentiful, varied food. (3 Wealth each)&quot; &quot;Store&quot;&gt;&gt;\
+&lt;&lt;set $weekFoodBuy to true&gt;&gt;&lt;&lt;set $foodQuality to 4&gt;&gt;&lt;&lt;set $wealth -= (3 * (4 - $famDead))&gt;&gt;\
 &lt;&lt;/link&gt;&gt;\
 &lt;&lt;else&gt;&gt;\
 Buy a week&#39;s worth of plentiful, varied food. (Cannot Afford)&lt;&lt;/if&gt;&gt;
 \
-&lt;&lt;if $wealth gte 10&gt;&gt;\
+&lt;&lt;if $wealth gte (2 * (4 - $famDead))&gt;&gt;\
 &lt;&lt;link &quot;Buy a week&#39;s worth of basic foodstuffs. (2 Wealth each)&quot; &quot;Store&quot;&gt;&gt;\
 &lt;&lt;set $weekFoodBuy to true&gt;&gt;&lt;&lt;set $foodQuality to 3&gt;&gt;&lt;&lt;set $wealth -= (2 * (4 - $famDead))&gt;&gt;&lt;&lt;/link&gt;&gt;\
 &lt;&lt;else&gt;&gt;\
 Buy a week&#39;s worth of basic foodstuffs. (Cannot Afford)&lt;&lt;/if&gt;&gt;
 \
-&lt;&lt;if $wealth gte 5&gt;&gt;\
+&lt;&lt;if $wealth gte (1 * (4 - $famDead))&gt;&gt;\
 &lt;&lt;link &quot;Buy a few day&#39;s worth of basic foodstuffs. (1 Wealth each)&quot; &quot;Store&quot;&gt;&gt;\
 &lt;&lt;set $weekFoodBuy to true&gt;&gt;&lt;&lt;set $foodQuality to 2&gt;&gt;&lt;&lt;set $wealth -= (1 * (4 - $famDead))&gt;&gt;&lt;&lt;/link&gt;&gt;\
 &lt;&lt;else&gt;&gt;\
@@ -804,24 +805,25 @@ You don&#39;t need medicine, as no-one in your family is sick.
 &lt;&lt;link &quot;Pray for your family&#39;s health.&quot; &quot;Church&quot;&gt;&gt;&lt;&lt;set $medQuality += 1&gt;&gt;&lt;&lt;set $weekPrayed to true&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;elseif $weekPrayed is true&gt;&gt; You pray for a swift recovery to this illness.&lt;&lt;elseif $famSick is 0&gt;&gt;
 Mercifully, no-one in your family is sick.&lt;&lt;/if&gt;&gt; &lt;&lt;/nobr&gt;&gt;
 
-[[Go Back|Corktown Hub]] </tw-passagedata><tw-passagedata pid="17" name="Family Death" tags="" position="235,1072" size="100,100">&lt;&lt;if $wAlive is true and $wHealth is 0 or $wAlive is true and $wNeeds is 0&gt;&gt; $wife has died. &lt;&lt;set $wAlive to false&gt;&gt;&lt;&lt;set $famDead += 1&gt;&gt;&lt;&lt;if $wHealth isnot 3&gt;&gt;&lt;&lt;set $famSick -= 1&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/if&gt;&gt;\
+[[Go Back|Corktown Hub]] </tw-passagedata><tw-passagedata pid="17" name="Family Death" tags="" position="233.33333333333334,1072" size="100,100">&lt;&lt;if $wAlive is true and $wHealth is 0 or $wAlive is true and $wNeeds is 0&gt;&gt; $wife has died. &lt;&lt;set $wAlive to false&gt;&gt;&lt;&lt;set $famDead += 1&gt;&gt;&lt;&lt;if $wHealth isnot 3&gt;&gt;&lt;&lt;set $famSick -= 1&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/if&gt;&gt;\
 &lt;&lt;if $sAlive is true and $sHealth is 0 or $sAlive is true and $sNeeds is 0&gt;&gt; $son has died. &lt;&lt;set $sAlive to false&gt;&gt;&lt;&lt;set $famDead += 1&gt;&gt;&lt;&lt;if $sHealth isnot 3&gt;&gt;&lt;&lt;set $famSick -= 1&gt;&gt;&lt;&lt;/if&gt;&gt; &lt;&lt;/if&gt;&gt;\
 &lt;&lt;if $dAlive is true and $dHealth is 0 or $dAlive is true and $dNeeds is 0&gt;&gt; $daughter has died. &lt;&lt;set $dAlive to false&gt;&gt;&lt;&lt;set $famDead += 1&gt;&gt;&lt;&lt;if $dHealth isnot 3&gt;&gt;&lt;&lt;set $famSick -= 1&gt;&gt;&lt;&lt;/if&gt;&gt; &lt;&lt;/if&gt;&gt;\
 &lt;&lt;if $wAlive is false and $sAlive is false and $dAlive is false&gt;&gt; &lt;&lt;set $famAlive to false&gt;&gt;&lt;&lt;/if&gt;&gt;
 
-[[Eternal rest, grant unto them, O Lord...|Corktown Hub][$deathFlag to false]] </tw-passagedata><tw-passagedata pid="18" name="TEST HERE" tags="" position="260,366" size="100,100">[[Corktown Hub]]
+[[Eternal rest, grant unto them, O Lord...|Corktown Hub][$deathFlag to false]] </tw-passagedata><tw-passagedata pid="18" name="TEST HERE" tags="" position="256,366" size="100,100">[[Corktown Hub]]
 
-&lt;&lt;set $act to 3&gt;&gt;
-&lt;&lt;set $week to 25&gt;&gt;
+&lt;&lt;set $act to 2&gt;&gt;
+&lt;&lt;set $week to 14&gt;&gt;
 
-&lt;&lt;set $debug to true&gt;&gt;</tw-passagedata><tw-passagedata pid="19" name="Player Death" tags="" position="491,1063" size="100,100">You have died.
+&lt;&lt;set $debug to true&gt;&gt;
+&lt;&lt;set $gameStart to true&gt;&gt;</tw-passagedata><tw-passagedata pid="19" name="Player Death" tags="" position="491,1063" size="100,100">You have died.
 
 &lt;&lt;button &quot;Try Again&quot;&gt;&gt;&lt;&lt;script&gt;&gt;UI.restart()&lt;&lt;/script&gt;&gt;&lt;&lt;/button&gt;&gt;
 </tw-passagedata><tw-passagedata pid="20" name="Choice1" tags="Act-1" position="1193,62" size="100,100">As you shovel away wet soil to the sound of distant thundercracks of dynamite, you notice one of your companions beginning to falter. He grows progressively more weary, until finally he vomits out a clear, whitish fluid, and collapses into a puddle of muddy water. You recognize him as one of your diseased fellows - without getting him hydrated quickly, he could die in a matter of hours. But little is known of how this disease spreads, and trying to help him yourself could put you at risk. You have to think quickly.
 
 &lt;a data-passage=&quot;Choice1Option3Test&quot; class=&quot;phys&quot;&gt;&lt;span&gt;Get help.&lt;/span&gt;&lt;/a&gt;
 &lt;&lt;if $state gte 3&gt;&gt;&lt;&lt;link &quot;Carry the worker to safety.&quot; &quot;Choice1Option1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;else&gt;&gt;(Min: Weary) Carry the worker to safety. &lt;&lt;/if&gt;&gt;
-[[Leave him be.|Choice1Option2]]</tw-passagedata><tw-passagedata pid="21" name="Choice1Option1" tags="" position="1316,64" size="100,100">You hurry over and throw the debilitated Irishman over your shoulders, hurrying to the local priest. That same clear, white fluid is seeping from his trousers, but you try not to pay it any mind. The priest is surprised at your sudden delivery, but grateful - he tells you that you might have saved the poor man&#39;s life. Satisfied with a job well done, you return to work - oblivious to your contamination.
+[[Leave him be.|Choice1Option2]]</tw-passagedata><tw-passagedata pid="21" name="Choice1Option1" tags="" position="1317.6666666666667,64" size="100,100">You hurry over and throw the debilitated Irishman over your shoulders, hurrying to the local priest. That same clear, white fluid is seeping from his trousers, but you try not to pay it any mind. The priest is surprised at your sudden delivery, but grateful - he tells you that you might have saved the poor man&#39;s life. Satisfied with a job well done, you return to work - oblivious to your contamination.
 
 &lt;&lt;nobr&gt;&gt;
 When night finally falls and you are released, you are given your daily pay and sent home. 
@@ -849,8 +851,8 @@ You leave with your wages. &lt;&lt;set $wealth += 4&gt;&gt;
 [[Head Home|Corktown Hub][$health -= 3]] 
 
 &lt;&lt;set $illness to 1&gt;&gt;\
-&lt;&lt;set $social += 10&gt;&gt;\
-&lt;&lt;set $compassion += 10&gt;&gt;\</tw-passagedata><tw-passagedata pid="22" name="Choice1Option2" tags="" position="1448,64" size="100,100">You ignore him. It&#39;s not worth the risk of infection, and someone will surely find him before you do - but you find your apathy has distanced you, however imperceptably, from your countrymen.
+&lt;&lt;set $social += 15&gt;&gt;\
+&lt;&lt;set $compassion += 15&gt;&gt;\</tw-passagedata><tw-passagedata pid="22" name="Choice1Option2" tags="" position="1448,64" size="100,100">You ignore him. It&#39;s not worth the risk of infection, and someone will surely find him before you do - but you find your apathy has distanced you, however imperceptably, from your countrymen.
 
 &lt;&lt;nobr&gt;&gt;
 When night finally falls and you are released, you are given your daily pay and sent home. 
@@ -877,8 +879,8 @@ You leave with your wages. &lt;&lt;set $wealth += 4&gt;&gt;
 
 [[Head Home|Corktown Hub][$health -= 3]] 
 
-&lt;&lt;set $social -= 5&gt;&gt;
-&lt;&lt;set $compassion -= 10&gt;&gt;</tw-passagedata><tw-passagedata pid="23" name="Choice1Option3Test" tags="phystest" position="1566,72" size="100,100">found on the Rideau and built to deny
+&lt;&lt;set $social -= 15&gt;&gt;
+&lt;&lt;set $compassion -= 15&gt;&gt;</tw-passagedata><tw-passagedata pid="23" name="Choice1Option3Test" tags="phystest" position="1566,72" size="100,100">found on the Rideau and built to deny
 i can part for your ships, or bind happy lives
 damming up waters, or parting for love,
 i keep what needs keeping, keys rain from above
@@ -912,8 +914,8 @@ You leave with your wages. &lt;&lt;set $wealth += $wages&gt;&gt;
 
 [[Head Home|Corktown Hub][$health -= 3]] 
 
-&lt;&lt;set $social += 10&gt;&gt;
-&lt;&lt;set $compassion += 5&gt;&gt;</tw-passagedata><tw-passagedata pid="25" name="Choice2" tags="Act-1" position="1734,68" size="100,100">As you&#39;re heading home, you&#39;re waylaid by a stout, scraggly man you quickly identify as Matthew, one of Corktown&#39;s recognizable drunkards. His usual jovial, happy demeanor - if perhaps obnoxious at times - is nowhere to be seen. Instead, he lurches up to you, grasping your sleeve with desperate eyes.
+&lt;&lt;set $social += 15&gt;&gt;
+&lt;&lt;set $compassion += 15&gt;&gt;</tw-passagedata><tw-passagedata pid="25" name="Choice2" tags="Act-1" position="1734,68" size="100,100">As you&#39;re heading home, you&#39;re waylaid by a stout, scraggly man you quickly identify as Matthew, one of Corktown&#39;s recognizable drunkards. His usual jovial, happy demeanor - if perhaps obnoxious at times - is nowhere to be seen. Instead, he lurches up to you, grasping your sleeve with desperate eyes.
 
 &quot;$pc,&quot; He asks, glancing over his shoulder. &quot;$pc, please. I need some money. I&#39;m shamed to be asking you like this, but they kicked me out - fired me - tossed me inna dirt. I&#39;ll starve. I- I just need a little loan. Just enough to last me a week or two to find somewhere to earn my coin.&quot;
 
@@ -932,9 +934,9 @@ You leave with your wages. &lt;&lt;set $wealth += $wages&gt;&gt;
 &lt;&lt;case 1&gt;&gt;
 &lt;&lt;set $wealth += $wages&gt;&gt;
 &lt;&lt;/switch&gt;&gt;
-&lt;&lt;else&gt;&gt; &lt;&lt;set $wealth += $wages&gt;&gt; &lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="26" name="Choice5" tags="Act-2" position="2006,415" size="100,100">A new priest has begun to preach in town. The Prots of Uppertown have taken too much, he cries - and in their arrogance they turn a blind eye to our suffering, to the flickering lives of our wives and children. We are due, he swears, for a reckoning. His methods are violent and seductive, and your countrymen flock to his promises of fire and righteous punishment, leaving your more moderate minister in the dust. &lt;&lt;if $wAlive is true&gt;&gt;$wife urges you to keep away from the newcomer&#39;s violent rhetoric, lest you put the family at risk.&lt;&lt;else&gt;&gt;You can feel the tantalizing allure of fury spurring you and your countrymen to action, but a part of you wonders if this is really what God intended.&lt;&lt;/if&gt;&gt;
+&lt;&lt;else&gt;&gt; &lt;&lt;set $wealth += $wages&gt;&gt; &lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="26" name="Choice5" tags="Act-2" position="2006,415" size="100,100">A new priest has begun to preach in town. The Prots of Uppertown have taken too much, he cries - and in their arrogance they turn a blind eye to our suffering, to the flickering lives of our wives and children. We are due, he swears, for a reckoning. His methods are violent and seductive, and your countrymen flock to his promises of fire and righteous punishment, leaving your more moderate minister in the dust. &lt;&lt;if $wAlive&gt;&gt;$wife urges you to keep away from the newcomer&#39;s violent rhetoric, lest you put the family at risk.&lt;&lt;else&gt;&gt;You can feel the tantalizing allure of fury spurring you and your countrymen to action, but a part of you wonders if this is really what God intended.&lt;&lt;/if&gt;&gt;
 
-[[Switch to the new, revolutionary priest.|Choice5Option1]]
+[[Switch to the new, radical priest.|Choice5Option1]]
 [[Stick with your moderate priest.|Choice5Option2]]
 
 &lt;&lt;set $eventProc to true&gt;&gt;
@@ -942,27 +944,27 @@ You leave with your wages. &lt;&lt;set $wealth += $wages&gt;&gt;
 
 [[Corktown Hub]] 
 
-&lt;&lt;set $social += 10&gt;&gt;
-&lt;&lt;set $compassion -= 10&gt;&gt;</tw-passagedata><tw-passagedata pid="28" name="Choice5Option2" tags="" position="2127,548" size="100,100">You elect to remain loyal to the priest that had provided you guidance and succor for these hard few years - but your fellow labourers note your absence, and begin to doubt your conviction.
+&lt;&lt;set $social += 15&gt;&gt;
+&lt;&lt;set $compassion -= 15&gt;&gt;</tw-passagedata><tw-passagedata pid="28" name="Choice5Option2" tags="" position="2127,548" size="100,100">You elect to remain loyal to the priest that had provided you guidance and succor for these hard few years - but your fellow labourers note your absence, and begin to doubt your conviction.
 
 [[Corktown Hub]]
 
-&lt;&lt;set $social -= 10&gt;&gt;
-&lt;&lt;set $compassion += 10&gt;&gt;</tw-passagedata><tw-passagedata pid="29" name="Choice2Option1" tags="" position="1847,76" size="100,100">You guide Matthew home, where you fish out a generous portion of your savings and offer them to him. He opens the bag, stunned, like a child on Christmas day. &quot;All- all this? Are you sure?&quot; he asks, hugging the purse close to his chest. &quot;You&#39;re a saint, $pc - a saint. I&#39;m gonna tell everyone about this. You&#39;ve saved me life, you have.&quot;
+&lt;&lt;set $social -= 15&gt;&gt;
+&lt;&lt;set $compassion += 15&gt;&gt;</tw-passagedata><tw-passagedata pid="29" name="Choice2Option1" tags="" position="1847,76" size="100,100">You guide Matthew home, where you fish out a generous portion of your savings and offer them to him. He opens the bag, stunned, like a child on Christmas day. &quot;All- all this? Are you sure?&quot; he asks, hugging the purse close to his chest. &quot;You&#39;re a saint, $pc - a saint. I&#39;m gonna tell everyone about this. You&#39;ve saved me life, you have.&quot;
 
 [[Continue|Corktown Hub]]
 
-&lt;&lt;set $social += 10&gt;&gt;
+&lt;&lt;set $social += 20&gt;&gt;
 &lt;&lt;set $compassion += 15&gt;&gt;
 &lt;&lt;set $wealth -= 30&gt;&gt;</tw-passagedata><tw-passagedata pid="30" name="Choice2Option2" tags="" position="1971,77" size="100,100">You reach into your coat and withdraw your day&#39;s earnings, and hand him half. He gives you a grateful smile as he pockets your coin. &quot;Bless you, $pc - this should keep food in my belly for a few days at least,&quot; he says, hurrying off to waylay another labourer. You sigh - hopefully he wasn&#39;t just begging for whiskey money.
 
 [[Continue|Corktown Hub]]
 
-&lt;&lt;set $social += 5&gt;&gt;
+&lt;&lt;set $social += 10&gt;&gt;
 &lt;&lt;set $compassion += 5&gt;&gt;
 &lt;&lt;set $wealth -= 15&gt;&gt;</tw-passagedata><tw-passagedata pid="31" name="Choice2Option3" tags="" position="2094,81" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;&lt;if $wealth gte 10&gt;&gt;
-&lt;&lt;set $social -=5&gt;&gt;
+&lt;&lt;set $social -=15&gt;&gt;
 &lt;&lt;set $compassion -=10&gt;&gt;
 You shake your head and wave him off. He doesn&#39;t take the bait. &quot;Come on, $pc, just a few coins is all I need! It&#39;s all I ask!&quot; You figure it&#39;s so he can buy more whiskey, and as soon as the words leave your lips his desperate smile turns into a scowl.
 
@@ -985,12 +987,12 @@ You shake your head and wave him off, explaining you can barely afford to provid
 [[Continue|Corktown Hub]]
 
 &lt;&lt;set $strike to true&gt;&gt;
-&lt;&lt;set $social += 5&gt;&gt;</tw-passagedata><tw-passagedata pid="34" name="Choice3Option2" tags="" position="2563,84" size="100,100">You spend the next fifteen hours hard at work. Your shift seems to take forever, and you can feel your limbs growing progressively weary as you work at stone and earth with pick and shovel - only receiving a measure of respite when assisted by the wheelbarrow. You are one of the few workers still employed during the strike, and while progress has slowed to a crawl, you are at least being paid. 
+&lt;&lt;set $social += 10&gt;&gt;</tw-passagedata><tw-passagedata pid="34" name="Choice3Option2" tags="" position="2563,84" size="100,100">You spend the next fifteen hours hard at work. Your shift seems to take forever, and you can feel your limbs growing progressively weary as you work at stone and earth with pick and shovel - only receiving a measure of respite when assisted by the wheelbarrow. You are one of the few workers still employed during the strike, and while progress has slowed to a crawl, you are at least being paid. 
 
 When night finally falls and you are released, you are given your daily pay and sent home, ignoring the spiteful looks cast by your companions. 
 
 &lt;&lt;link &quot;Head Home&quot; &quot;Corktown Hub&quot;&gt;&gt;&lt;&lt;set $health -=3&gt;&gt;
-&lt;&lt;set $wealth += 4&gt;&gt;&lt;&lt;set $social -= 5&gt;&gt;&lt;&lt;/link&gt;&gt;
+&lt;&lt;set $wealth += 4&gt;&gt;&lt;&lt;set $social -= 15&gt;&gt;&lt;&lt;/link&gt;&gt;
 </tw-passagedata><tw-passagedata pid="35" name="Strike End" tags="" position="2440,205" size="100,100">After weeks of gruelling striking, your employers have finally elected to improve your working conditions and your pay.
 
 &lt;&lt;if $strike is true&gt;&gt; You can finally start making money again. &lt;&lt;set $social += 10&gt;&gt; &lt;&lt;else&gt;&gt; Your fellow labourers resent you for reaping the rewards of a strike you didn&#39;t participate in. &lt;&lt;set $social -= 10&gt;&gt;&lt;&lt;/if&gt;&gt;
@@ -1036,7 +1038,7 @@ Luckily, you manage to fill in for a sick labourer at a logging camp, and spend 
 &lt;&lt;if $week is 15 and $eventProc is false&gt;&gt;&lt;&lt;goto Choice4&gt;&gt;&lt;&lt;/if&gt;&gt;
 
 &lt;&lt;if $week is 19 and $eventProc is false&gt;&gt;&lt;&lt;goto Choice5&gt;&gt;&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="40" name="Steal" tags="" position="1107,442" size="100,100">&lt;&lt;nobr&gt;&gt;You make your way to Upper Town and look for marks. 
-&lt;&lt;set _mark to random(10)&gt;&gt; &lt;&lt;set $compassion -= 5&gt;&gt;
+&lt;&lt;set _mark to random(10)&gt;&gt; &lt;&lt;set $compassion -= 10&gt;&gt;
 
 &lt;&lt;if _mark lte 1&gt;&gt;
 Eventually, you find a solitary purse, left in an empty carriage. You jump up to swipe it, but are immediately interrupted by the cries of &#39;Thief&#39; - it seems the owner had chosen that exact moment to depart from the store. You flee empty-handed, and rumors of your involvement soon spread around Corktown.
@@ -1057,7 +1059,7 @@ You spot a store employee stocking whiskey, and when his back is turned you disc
 &lt;&lt;if $week isnot 22&gt;&gt;[[Continue|Corktown Hub]]&lt;&lt;else&gt;&gt;[[Continue|Choice6]]&lt;&lt;/if&gt;&gt;
 
 &lt;&lt;set $daytime to false&gt;&gt;</tw-passagedata><tw-passagedata pid="41" name="Rob" tags="" position="1106,571" size="100,100">&lt;&lt;nobr&gt;&gt;You make your way to Upper Town &lt;&lt;if $sr is 3 or $sr is 4&gt;&gt; with a few equally desperate companions &lt;&lt;else&gt;&gt; alone &lt;&lt;/if&gt;&gt; to earn some money from those who you reckon have more than enough already.
-&lt;&lt;set _mark to random(10)&gt;&gt; &lt;&lt;set $compassion -= 15&gt;&gt;
+&lt;&lt;set _mark to random(10)&gt;&gt; &lt;&lt;set $compassion -= 20&gt;&gt;
 
 &lt;&lt;if _mark lte 1&gt;&gt;
 &lt;&lt;if $sr is 3 or $sr is 4&gt;&gt;
@@ -1145,8 +1147,8 @@ Disappointed, they march off, leaving you alone and unharmed.
 &lt;&lt;set $compassion += 15&gt;&gt;
 &lt;&lt;set $social += 15&gt;&gt;</tw-passagedata><tw-passagedata pid="49" name="Choice6" tags="" position="2336,412" size="100,100">&lt;&lt;if $sAlive&gt;&gt;$son comes home just before dinner, looking surprisingly sheepish. Sensing something is amiss, you begin questioning him about his day - and it&#39;s not long before you&#39;re prying open his little hand to reveal the golden chain necklace he&#39;d been hiding. He tells you he&#39;d found it on the ground, but the chain is in nearly pristine condition - far more likely he was pressured into stealing it. How do you want to handle this?
 
-[[Reprimand him.|Choice6Option1]]
-[[Encourage him.|Choice6Option2]]
+[[Reprimand him and return the necklace.|Choice6Option1]]
+[[Encourage him and sell the necklace.|Choice6Option2]]
 &lt;&lt;else&gt;&gt; On your way home, you spot a group of children playing blind man&#39;s bluff. They seem to be around nine to eleven years old - $son&#39;s age, if he were still with you. You return home, shackled by some unseen weight. &lt;&lt;set $health -= 5&gt;&gt;
 
 [[Continue|Corktown Hub]] 
@@ -1156,7 +1158,7 @@ You return home with neither wealth nor gratitude to show for your efforts, but 
 
 [[Continue|Corktown Hub]]
 
-&lt;&lt;set $compassion += 15&gt;&gt;
+&lt;&lt;set $compassion += 25&gt;&gt;
 </tw-passagedata><tw-passagedata pid="51" name="Choice6Option2" tags="" position="2362,536" size="100,100">You laugh, and pat your son on the head. He seems surprised at first, but is content enough with your praise that he raises no objections when you take the necklace from him and pocket it. You tell him that if he finds any more valuables laying about in the dirt, he should bring them to you. Any pangs of guilt you might have felt are fleeting - at least you&#39;ll be able to eat well this week.
 
 [[Continue|Corktown Hub]]
@@ -1356,8 +1358,8 @@ Bytown belongs to the Shiners.
 
 [[Return home.|Corktown Hub]]
 
-&lt;&lt;set $compassion -= 10&gt;&gt;
-&lt;&lt;set $social += 10&gt;&gt;</tw-passagedata><tw-passagedata pid="62" name="Choice8Option2" tags="" position="1704,1044" size="100,100">&quot;What? You&#39;ve got better things to do than get justice for your goddamned kin?&quot;
+&lt;&lt;set $compassion -= 15&gt;&gt;
+&lt;&lt;set $social += 15&gt;&gt;</tw-passagedata><tw-passagedata pid="62" name="Choice8Option2" tags="" position="1704,1044" size="100,100">&quot;What? You&#39;ve got better things to do than get justice for your goddamned kin?&quot;
 
 A few faces turn to you - expressions lit up with the electric anger coarsing through the air. They&#39;re all the distraction your acquaintance needs to drive his fist into your gut.
 
@@ -1369,7 +1371,7 @@ You would later learn that Galipaut and his family had fled the tavern before it
 
 [[Continue|Corktown Hub]]
 
-&lt;&lt;set $compassion += 15&gt;&gt;
+&lt;&lt;set $compassion += 20&gt;&gt;
 &lt;&lt;set $health -= 10&gt;&gt;
 &lt;&lt;set $social -= 15&gt;&gt;</tw-passagedata><tw-passagedata pid="63" name="Choice9" tags="" position="2035,912" size="100,100">You&#39;re passing by the perimeter of Upper Town when you overhear shouting around a street bend - something about an arrest. Curious, you investigate. You&#39;re hardly surprised when you turn the corner and observe three Shiners savagely beating what appears to be a policeman. Some passerby watch, others hurry past - not a single one dares to help, lest they face retaliation. It seems the Shiner&#39;s reign of terror is exceeding expectations, and the amateur police force is as powerless as the rest of the populace. But nevermind that - what will you do?
 
@@ -1409,7 +1411,7 @@ They seem to have things under control, here. From what you gather over the next
 
 [[Continue|Corktown Hub]]
 
-&lt;&lt;set $compassion -= 5&gt;&gt;</tw-passagedata><tw-passagedata pid="67" name="End Screen" tags="" position="3528,913" size="100,100">&lt;&lt;nobr&gt;&gt; &lt;&lt;set _score to ($cr + $state) / 2&gt;&gt;
+&lt;&lt;set $compassion -= 10&gt;&gt;</tw-passagedata><tw-passagedata pid="67" name="End Screen" tags="" position="3528,913" size="100,100">&lt;&lt;nobr&gt;&gt; &lt;&lt;set _score to ($cr + $state) / 2&gt;&gt;
 Against all odds, you&#39;ve survived nineteenth century Ottawa&lt;&lt;if $famDead is 0&gt;&gt;, along with the rest of your family. Congratulations. &lt;&lt;elseif $famDead is 3&gt;&gt;... alone. &lt;&lt;elseif $famDead &gt;= 1&gt;&gt;. But not all of your family did.&lt;&lt;/if&gt;&gt; 
 &lt;&lt;/nobr&gt;&gt;
 
@@ -1499,7 +1501,7 @@ and all its old trades.
 
 &lt;&lt;set _choice to $choice &gt;&gt;\
 &lt;&lt;if _choice is &quot;Bytown Museum&quot; or _choice is &quot;bytown museum&quot; or _choice is &quot;Bytown museum&quot; or _choice is &quot;bytown Museum&quot;&gt;&gt;&lt;&lt;link &quot;Correct&quot; &quot;Choice10Option1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;else&gt;&gt;&lt;&lt;textbox &quot;$choice&quot; &quot;&quot; &quot;Choice10Option1Test&quot; autofocus&gt;&gt; [[Answer|Choice10Option1Test]]&lt;&lt;/if&gt;&gt;
-[[Back|Choice8]]</tw-passagedata><tw-passagedata pid="75" name="Choice10Option1" tags="" position="2478,1279" size="100,100">&quot;Vulgar and base, am I? What can I say - your wife has good taste in men.&quot;
+[[Back|Choice8]]</tw-passagedata><tw-passagedata pid="75" name="Choice10Option1" tags="" position="2481,1275" size="100,100">&quot;Vulgar and base, am I? What can I say - your wife has good taste in men.&quot;
 
 A cheap shot, but from the boisterous laughter that fills the hall you can tell it had its intended effect. You even catch Aylen smirking along. Flustered, the gentleman pushes himself off his seat and marches off as quick as his feet will carry him, cursing as he goes. You take your well-earned seat and sit back, enjoying this farce for all its worth.
 
@@ -1515,7 +1517,9 @@ The next weeks are a blur, spent in hiding as your other allies go on the run - 
 
 It is difficult to say what happened to break terror&#39;s grip on the populace, but it precipated a noticable change in the whole atmosphere of Bytown. The authorities, whose attempts at peacekeeping had hitherto been pathetically amateur, act with remarkable unity to capture the perpetrators. But it was not the government that finally brought the era of the Shiners to its knees - it was a newfound sense of confidence, a sense the peoples had been pushed too far. Gone are the rowdy, arrogant days of the Bytown Shiners. You still call yourselves as such, of course... but it doesn&#39;t mean a shadow of what it once did.
 
-[[Continue|Choice12]] </tw-passagedata><tw-passagedata pid="77" name="Choice11Option2" tags="" position="2888,1041" size="100,100">Aylen gives you an appraising look, then shrugs. &quot;Guess I was wrong about you. Oh well.&quot;
+[[Continue|Choice12]] 
+
+&lt;&lt;set $compassion -= 30&gt;&gt;</tw-passagedata><tw-passagedata pid="77" name="Choice11Option2" tags="" position="2888,1041" size="100,100">Aylen gives you an appraising look, then shrugs. &quot;Guess I was wrong about you. Oh well.&quot;
 
 He gestures towards the door, and you leave with the eyes of four men boring down on you.
 
