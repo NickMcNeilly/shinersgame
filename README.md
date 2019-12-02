@@ -1,9 +1,9 @@
 # Shiners Game
 by Nick McNeilly
 
+[Begin](https://nickmcneilly.github.io/shinersgame/shiners.html)
 Last updated December 2, 2019
 
-[Begin](https://nickmcneilly.github.io/shinersgame/shiners.html)
 
 [Paradata]
 
