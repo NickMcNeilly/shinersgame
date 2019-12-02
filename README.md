@@ -5,7 +5,7 @@ by Nick McNeilly
 
 Last updated December 2, 2019
 
-Welcome. This is a Twine game I constructed over the course of my [Guerrilla Public History](https://github.com/shawngraham/guerrilla-dh/wiki) class at Carleton University. It's based on the historical city of Bytown in the 1830s, now more commonly known as Ottawa, capital of Canada. The game explores the difficult lives of the Irish labourers that worked on the Rideau canal, as well as the formation of the violent gang of Irish lumberers known as the Shiners.
+Welcome. This is a Twine game I constructed over the course of my [Guerrilla Public History](https://github.com/shawngraham/guerrilla-dh/wiki) class at Carleton University. It's based on the historical city of Bytown in the 1830s, now more commonly known as Ottawa, capital of Canada. The game explores the difficult lives of the Irish labourers that worked on the Rideau canal, and uncovers what led some of them to join the Shiners - a violent gang of timberers and rafters that tormented the defenseless city for years.
 
 [Paradata]
 
