@@ -7,9 +7,9 @@ Last updated December 2, 2019
 
 Welcome. This is a Twine game I constructed over the course of my [Guerrilla Public History](https://github.com/shawngraham/guerrilla-dh/wiki) class at Carleton University. It's based on the historical city of Bytown in the 1830s, now more commonly known as Ottawa, capital of Canada. The game explores the difficult lives of the Irish labourers that worked on the Rideau canal, and uncovers what led some of them to join the Shiners - a violent gang of timberers and rafters that tormented the defenseless town for years.
 
-[Paradata]
+[Paradata](https://nickmc.netlify.com/post/04-12-2019-paradata/)
 
-[Devlog 9](https://nickmc.netlify.com/post/03-12-2019-devlog-nine/)
+[Devlog 9](https://nickmc.netlify.com/post/04-12-2019-devlog-nine/)
 
 [Devlog 8](https://nickmc.netlify.com/post/02-12-2019-devlog-eight/)
 
